@@ -1,0 +1,88 @@
+@media only screen and (max-width:800px){
+    #maindiv{
+        background-color: grey;
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        width: 90%;
+        height: 300px;
+    }
+    #heading{
+        position: absolute;
+        font-size: 17px;
+        left: 50%;
+        top:7%;
+        transform: translate(-50%,-50%);
+        text-shadow: 10px 10px 15px black;
+    }
+    .textinput{
+        position: relative;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        margin-top: 22px;
+        padding: 5px;
+        font-size: 15px;
+        border-radius: 3px;
+        border:1px solid black;
+    }
+    #dadastureba_btn{
+        position: absolute;
+        left: 50%;
+        top:84%;
+        background-color: green;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transform: translate(-50%,-50%);
+    }
+}
+@media only screen and (min-width:800px){
+    #maindiv{
+        /* background-color: rgb(195, 176, 176); */
+        background-color: grey;
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        width: 60%;
+        height: 400px;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+    #heading{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-shadow: 15px 15px 15px black;
+    }
+    .textinput{
+        position: relative;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        margin-top: 20px;
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 3px;
+        border:1px solid black;
+    }
+    #dadastureba_btn{
+        position: absolute;
+        left: 50%;
+        top:84%;
+        background-color: green;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transform: translate(-50%,-50%);
+        border:2px solid black;
+        transition: opacity 0.3s;
+    }
+    #dadastureba_btn:hover{
+        opacity: 0.7;
+        /* margin-top: -1px; */
+        
+    }
+}

@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian Base 2016 || მოიძიე ინფორმაცია საქართველოს მოქალაქეზე</title>
+    <link href="/static/index.css" rel="stylesheet" >
+    <link href="/static/allpage.css" rel="stylesheet" >
+    <link rel="icon" href = "/static/gb_sym.png">
+    
+    <script src="/static/jquery.js"></script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1436134057225682"
+     crossorigin="anonymous"></script>
+
+     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    
+    <link href = "/static/eror.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+</head> 
+<body style="height:100%">
+    {{navbar_authed}}
+    {{bg}}
+    <div id="root">
+        <div style="display:none;" id = "warning_div">
+            <div id = "warning_div_maindiv">
+                <div id = "warning_div_image"></div>
+                <div id = "warning_div_heading">Disclaimer</div>
+                <div id = "warning_div_description">
+                    საიტზე  მოძიებული ინფორმაციის ცუდი მიზნებისთვის გამოყენების შემთხვევაში საიტის მფლობელი არ ვაგებ პასუხს
+                </div>
+                <div id = "warning_div_submit_button">გასაგებია</div>
+                
+                
+            </div>
+        </div>
+        
+        {{unauthed_reglog_mob}}
+        
+        {{unauthed_reglog}}
+        
+
+        <h3 id = "heading">Georgian Database 2016</h3>
+        <div id = "maindiv">
+            <!-- <div id = "instruction_btn"></div> -->
+            <input value = "{{saxeli_value}}" id = "saxeli_input" class = "infoinput" type="text" placeholder="სახელი">
+            <input value = "{{gvari_value}}" id = "gvari_input" class = "infoinput"  type="text" placeholder="გვარი"><br>
+            
+            <div id = "modzebnva">მოძებნა</div>
+            <div class="filter_button"></div>
+
+           
+            
+        </div>
+        <div id = "filter_div">
+            <h2 style="text-align: center;">ფილტრაცია</h2>
+            <div id = "filter_div_cancellbtn"></div>
+            
+            <div id = "asaki_filter_label_parent">
+                <label for="asaki_filter_min" id = "asaki_filter_min_label" class="asaki_filter_label"  >მინიმალური <br class="asaki_filter_label_br"> ასაკი</label>
+                <label for="asaki_filter_max" id = "asaki_filter_max_label" class="asaki_filter_label"  >მაქსიმალური <br class="asaki_filter_label_br"> ასაკი</label>
+            </div>
+            
+            <div id = "asaki_filter_input_parent">
+                <input id ="asaki_filter_min"  class = "asaki_filter_input" maxlength="3" value = "0" type="number" placeholder="min">
+                <input id = "asaki_filter_max" class = "asaki_filter_input" maxlength="3" value = "150" type="number" placeholder="max">
+            </div>
+
+            
+
+
+
+
+            <label id = "region_filter_label">რეგიონი</label>
+
+            <div class = "region_filter_input_div_parent">
+
+            
+                <div id = "region_filter_yvelainput_div" class="region_filter_input_div">
+                    <input type="text" class="region_filter_input selected_region_filter" id = "region_filter_yvelainput" value = "ყველა" disabled>
+                </div>
+                <div id = "region_filter_textinput_div" class="region_filter_input_div">
+                    <input type="text" class="region_filter_input" id = "region_filter_textinput"  value="{{regioni}}" disabled>
+                </div>
+
+            </div>
+
+
+            <div id = "region_filter_options_div">
+
+            </div>
+            
+            
+            
+
+
+
+
+            
+        </div>
+        <div id = "premium_pay_div" style="display: none;">
+            <div id = "premium_pay_cancellbtn" class = "dbsearch_results_cancelbtn"></div>
+            <div id = "premium_num_div">
+                <div id = "premium_num_adjuster_minus" class="premium_num_el premium_num_adjuster" ></div>
+                <div class="premium_num_el premium_num_input" id = "premium_num_input" ></div>
+                <div id = "premium_num_adjuster_plus" class="premium_num_el premium_num_adjuster" ></div>
+                
+            </div>
+
+            <div id = "premium_paydiv_jamuri_fasi_div">
+                <span id = "premium_paydiv_jamuri_fasi_label">ჯამური ფასი</span><br>
+                <span id = "premium_paydiv_jamuri_fasi">$4.99</span>
+            </div>
+
+            <div id="paypal-button" class = "paypal_butoni premium_asd"></div>
+
+        </div>
+        <h4 id = "credintal">by <a style="text-decoration: none;" href = "https://tiktok.com/@tech..man" target="_blank">TechMan</a></h4>
+        
+        <!-- <div style="background-color: white;width:100%;height: 400px;position:absolute;top:100%; left:0%"></div> -->
+
+    </div>
+    <script src = "/static/eror.js"></script>
+    <!-- <script src = "/static/fernet.js/fernet.js-master/fernetBrowser.js"></script>
+    <script src = "/static/comps/save_row2.js"></script> -->
+    <script>
+
+        var authed = "{{authed}}";
+        var premium = "{{premium}}";
+        var redirect_act_reqArg = "{{redirect_act_reqArg}}";
+
+        
+        var warning_div = document.getElementById("warning_div")
+        var warning_div_submit_button = document.getElementById("warning_div_submit_button")
+
+        warning_div_submit_button.onclick = function(){
+            warning_div.style.display = "none";
+            document.cookie= "warning_passed=true";
+        }
+        if(kuki.warning_passed == undefined){
+        // if(true){
+            warning_div.style.display = "block";
+            
+        }
+
+
+        var locations = [
+        "აბასთუმანი",
+        "ახალციხე",
+        "ბათუმი",
+        "ბაკურიანი",
+        "ბოლნისი",
+        "ბორჯომი",
+        "გონიო",
+        "გორი",
+        "გუდაური",
+        "გურჯაანი",
+        "დავით-გარეჯი",
+        "ზესტაფონი",
+        "ზუგდიდი",
+        "თბილისი",
+        "თელავი",
+        "თიანეთი",
+        "ლაგოდეხი",
+        "ლანჩხუთი",
+        "მანგლისი",
+        "მარნეული",
+        "მესტია",
+        "მცხეთა",
+        "ოზურგეთი",
+        "ომალო",
+        "ონი",
+        "რუსთავი",
+        "საგარეჯო",
+        "სამტრედია",
+        "საჩხერე",
+        "სენაკი",
+        "სიონი",
+        "სიღნაღი",
+        "სოხუმი",
+        "სურამი",
+        "ურეკი",
+        "უშგული",
+        "ფოთი",
+        "ქობულეთი",
+        "ქუთაისი",
+        "შატილი",
+        "შეკვეთილი",
+        "შოვი",
+        "ჩოხატაური",
+        "ცხინვალი",
+        "წინანდალი",
+        "წყნეთი",
+        "ჭიათურა",
+        "ხარაგაული",
+        "ხაშური",
+        "ხობი"
+    ]
+    var locations_en = [
+        "abastumani",
+        "axalcixe",
+        "batumi",
+        "bakuriani",
+        "bolnisi",
+        "borjomi",
+        "gonio",
+        "gori",
+        "gudauri",
+        "gurjaani",
+        "davit gareji",
+        "zestafoni",
+        "zugdidi",
+        "tbilisi",
+        "telavi",
+        "tianeti",
+        "lagodexi",
+        "lanchxuti",
+        "manglisi",
+        "marneuli",
+        "mestia",
+        "mcxeta",
+        "ozurgeti",
+        "omalo",
+        "oni",
+        "rustavi",
+        "sagarejo",
+        "samtredia",
+        "sachxere",
+        "senaki",
+        "sioni",
+        "sighnaghi",
+        "soxumi",
+        "surami",
+        "ureki",
+        "ushguli",
+        "foti",
+        "qobuleti",
+        "qutaisi",
+        "shatili",
+        "shekvetili",
+        "shovi",
+        "choxatauri",
+        "cxinvali",
+        "winandali",
+        "wyneti",
+        "chiatura",
+        "xaragauli",
+        "xashuri",
+        "xobi"
+
+
+        ]
+        
+        
+        function saxeligvari_filter(e){
+            if((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 97 && e.keyCode <= 122)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+
+        var premium_pay_cancellbtn = document.getElementById("premium_pay_cancellbtn");
+        premium_pay_cancellbtn.onclick =function(){
+            document.getElementById('premium_pay_div').style.display = "none";
+
+            window.history.pushState("","","/");
+
+        }
+        // document.getElementById("saxeli_input").onkeypress = saxeligvari_filter;
+        // document.getElementById("gvari_input").onkeypress = saxeligvari_filter;
+        
+        var filter_button = document.getElementsByClassName("filter_button")[0];
+        var filter_div = document.getElementById("filter_div");
+        var filter_div_cancellbtn = document.getElementById("filter_div_cancellbtn");
+
+        var region_filter_yvelainput = document.getElementById("region_filter_yvelainput");
+        var region_filter_textinput = document.getElementById("region_filter_textinput");
+
+        var region_filter_yvelainput_div = document.getElementById("region_filter_yvelainput_div");
+        var region_filter_textinput_div = document.getElementById("region_filter_textinput_div");
+
+        var region_filter_options_div = document.getElementById("region_filter_options_div")
+
+
+        var qalaqi_filterbtn_bolo_tap = 0;
+        region_filter_yvelainput_div.onclick = function(){
+            region_filter_yvelainput.className = "region_filter_input selected_region_filter";
+            region_filter_textinput.className = "region_filter_input";
+        }
+        region_filter_textinput_div.onclick = function(){
+            region_filter_textinput.className = "region_filter_input selected_region_filter";
+            region_filter_yvelainput.className = "region_filter_input";
+            if((new Date().getTime() - qalaqi_filterbtn_bolo_tap) < 500){
+                region_filter_textinput.disabled = "";
+                region_filter_textinput.focus()
+            }
+
+
+
+            qalaqi_filterbtn_bolo_tap = new Date().getTime()
+            
+        }
+        function options_update(e){
+            region_filter_options_div.innerHTML = "";
+
+            if(region_filter_textinput.value.length > 0){
+
+
+                for(let i of locations.concat(locations_en)){
+                    if( i.toLowerCase().startsWith(region_filter_textinput.value.toLowerCase()) ){
+                        let optioni = document.createElement("div");
+                        optioni.className = "region_filter_options_eldiv";
+                        let optioni_span = document.createElement("span");
+                        optioni_span.className = "region_filter_options_elspan";
+                        optioni_span.innerText = i;
+
+                        optioni.append(optioni_span);
+
+
+                        region_filter_options_div.append(optioni);
+
+                        optioni.onclick = function(){
+                            region_filter_options_div.innerHTML = "";
+                            region_filter_textinput.value = optioni_span.innerText;
+                        }
+
+                    }
+                }
+            }
+            
+        }
+        region_filter_textinput.onkeyup = options_update;
+        // region_filter_textinput_div.ondblclick = function(){
+        //     region_filter_textinput.disabled = "";
+        //     region_filter_textinput.click()
+        // }
+
+
+        filter_button.onclick = function(){
+            filter_div.style.display = "block"    
+        }
+        filter_div_cancellbtn.onclick = function(){
+            filter_div.style.display = "none";
+        }
+        document.body.addEventListener("click",function(e){
+            
+            // let parclass_ls = [];
+            let parclass_ls = "";
+            
+            let mshobeli = e.target;
+
+            while(mshobeli != undefined){
+                // parclass_ls.push(mshobeli.className)
+                // parclass_ls.push(mshobeli.id)
+                parclass_ls+= (mshobeli.className + mshobeli.id)
+
+                
+                mshobeli = mshobeli.parentNode
+            }
+            
+            if(!parclass_ls.includes("filter")){
+                filter_div.style.display = "none";
+            }
+            if(!parclass_ls.includes("premium")){
+                if(document.getElementsByClassName("premium_div")[0] != undefined){
+                    // document.body.removeChild(document.getElementsByClassName("premium_div")[0]);
+                    document.getElementsByClassName("premium_div")[0].style.display = "none";
+                    premium_pay_div.style.display = "none";
+                    window.history.pushState("","","/");
+                }
+                
+                
+            }
+            
+            
+
+
+            if(e.target != region_filter_textinput_div && e.target != region_filter_textinput && e.target.className != "region_filter_options_eldiv"){
+                region_filter_textinput.disabled = "true";
+                region_filter_options_div.innerHTML = "";
+            }
+            modzebnva.status = "done"
+            
+        })
+
+        var registracia = document.getElementById("registracia");
+        var avtorizacia = document.getElementById("avtorizacia");
+        // if(document.getElementById("profile_info") != undefined){
+        //     console.log("geaagea")
+        //     var secret = new fernet.Secret(kuki["enc_key"]);
+        //     console.log("batashi")
+        //     var token = new fernet.Token({
+        //         secret: secret,
+        //         time: Date.parse(1),
+        //         iv: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        //     })
+        //     console.log("felony")
+        // }
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) ) + min;
+        }
+
+        function ranstr(zoma,charls="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"){
+            let x = 0;
+            let pasuxi = ""
+            while(x < parseInt(zoma)){
+                pasuxi += charls[getRndInteger(0,charls.length-1)]
+                x++;
+            }
+            return pasuxi
+        }
+        
+                
+        
+        
+        if(window.innerWidth > 800){
+            
+            if(document.getElementById("profile_info") == undefined){
+                avtorizacia.onclick = function(){
+                    // window.location.href = "/login"
+                    livedirect("/login")
+                    }
+                
+                registracia.onclick = function(){  
+                    // window.location.href = "/signup";
+                        livedirect("/signup")
+                    }
+            }
+            
+                
+
+            
+        }
+        else{
+            if(document.getElementById("profile_info") != undefined){
+                
+            }
+            if(document.getElementById("mob_avtorizacia") != undefined && document.getElementById("mob_registracia") != undefined){
+                document.getElementById("mob_avtorizacia").onclick = function(){
+                    // window.location.href = "/login";
+                    livedirect("/login")
+                }
+                
+                document.getElementById("mob_registracia").onclick = function(){  
+                    // window.location.href = "/signup";
+                    livedirect("/signup")
+
+                }
+                document.getElementById("mobile_navbar_btn").state = "pass";
+                document.getElementById("mobile_navbar_btn").status = "closed";
+                document.getElementById("mobile_navbar_cancell_btn").onclick = function(){
+                if(document.getElementById("mobile_navbar_btn").status == "open"){
+                        
+                        document.getElementById("mobile_navbar").style.left = "-100%";
+
+
+
+
+
+
+                        document.getElementById("mobile_navbar_btn").status = "closed";
+                    }
+                }
+
+            document.getElementById("mobile_navbar_btn").onclick = 
+                function(){
+                    if(document.getElementById("mobile_navbar_btn").state == "pass"){
+                            document.getElementById("mobile_navbar_btn").state = "opening";
+                            let marcx = -100;
+                            let x = 0.03;
+                            let y = 0.08;
+                            function mobile_navbar_slide_f(){
+                                if(marcx <= 0){
+                                    marcx+=x;
+                                    x+=y;
+                                    document.getElementById("mobile_navbar").style.left = marcx+"%";
+                                }
+                                else{
+                                    marcx=0;
+                                    document.getElementById("mobile_navbar").style.left =  marcx+"%";
+                                    clearInterval(mobile_navbar_slide_inter);
+                                    document.getElementById("mobile_navbar_btn").state = "pass"
+                                    document.getElementById("mobile_navbar_btn").status = "open";
+                                    
+                                }
+                            
+                        }
+                        let mobile_navbar_slide_inter = setInterval(mobile_navbar_slide_f,1);
+                    }
+                }
+            }
+            
+            
+            
+
+            
+            
+        }
+        var premium_pay_div = document.getElementById('premium_pay_div');
+
+
+
+        var CREATE_PAYMENT_URL  = '/payment';
+        var EXECUTE_PAYMENT_URL = '/execute';
+
+        paypal.Button.render({
+
+            env: 'production', //     sandbox || production
+
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function() {
+                return paypal.request.post(CREATE_PAYMENT_URL,{
+                    raodenoba : premium_num_input.value
+                }).then(function(data) {
+                    return data.paymentID;
+                });
+            },
+
+            onAuthorize: function(data) {
+                return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                    paymentID: data.paymentID,
+                    payerID:   data.payerID
+                }).then(function(res) {
+
+                    console.log(res.success)
+                    if(res.success==true){
+                        // window.location = "http://localhost:5000/";
+                        window.location = "/";
+                    }
+                    // The payment is complete!
+                    // You can now show a confirmation message to the customer
+                });
+            }
+
+        }, '#paypal-button');
+
+
+        premium_num_input.innerText = "1 თვე";
+        premium_num_input.value = 1;
+        
+
+        var premium_dur_adjuster_disabled_opValue = "0.4";
+        var premium_paydiv_jamuri_fasi = document.getElementById("premium_paydiv_jamuri_fasi")
+
+        // premium_paydiv_jamuri_fasi.innerText = "$4.99" parseInt(x * 100) / 100
+        function premium_countadjust_mutualF(){
+            premium_num_input.innerText = premium_num_input.value + " თვე";
+
+            premium_paydiv_jamuri_fasi.innerText = "$"+ (parseInt((premium_num_input.value * 4.99) * 100) / 100 )   ;
+        }
+
+        premium_num_adjuster_minus.style.opacity = premium_dur_adjuster_disabled_opValue;
+
+        premium_num_adjuster_minus.onclick = function(){
+            if(premium_num_input.value > 1){
+                premium_num_input.value += -1;
+                if(premium_num_input.value == 1){
+                    premium_num_adjuster_minus.style.opacity = premium_dur_adjuster_disabled_opValue;
+                }
+                premium_num_adjuster_plus.style.opacity = "1";
+                
+
+                // premium_num_input.innerText = premium_num_input.value + " თვე";
+
+                premium_countadjust_mutualF()
+
+                
+            }
+            
+
+
+        }
+        premium_num_adjuster_plus.onclick = function(){
+            if(premium_num_input.value < 12){
+                premium_num_input.value += 1;
+                if(premium_num_input.value == 12){
+                    premium_num_adjuster_plus.style.opacity = premium_dur_adjuster_disabled_opValue;
+                }
+                
+                premium_num_adjuster_minus.style.opacity = "1";
+
+                // premium_num_input.innerText = premium_num_input.value + " თვე";
+
+
+                premium_countadjust_mutualF()
+            }
+            
+        }
+        
+
+
+
+
+            
+        let premium_div = document.createElement("div");
+        premium_div.style.display = "none";
+        premium_div.className = "premium_div";
+        document.body.append(premium_div);
+
+        
+        // premium_pay_div.style.display = "block";
+
+        let premium_div_cancelbtn = document.createElement("div");
+        premium_div_cancelbtn.className = "dbsearch_results_cancelbtn";
+
+        let premium_div_heading = document.createElement("h2")
+        premium_div_heading.className = "premium_div_heading";
+        premium_div_heading.innerText = "პრემიუმი";
+
+        let premium_div_agwera = document.createElement("div");
+        premium_div_agwera.className = "premium_div_agwera";
+        premium_div_agwera.innerText = `
+            1 თვე ულიმიტო მოძებნისთვის აიღეთ პრემიუმ Pass, აპის თქვენი 40 მეგობრისთვის გაზიარებით ან შაურმის ფასის გადახდით🌮
+        `;
+
+        let premium_div_butonsdiv = document.createElement("div");
+        premium_div_butonsdiv.className = "premium_div_butonsdiv";
+
+        let premium_div_share_btn = document.createElement("div");
+        let premium_div_ANlabel = document.createElement("span");
+        let premium_div_pay_btn = document.createElement("div");
+
+        premium_div_share_btn.className = "premium_div_share_btn premium_div_btn";
+        premium_div_ANlabel.className = "premium_div_ANlabel";
+        premium_div_pay_btn.className = "premium_div_pay_btn premium_div_btn";
+        
+        premium_div_share_btn.innerText = "40🔗";
+        premium_div_ANlabel.innerText = "ან"
+        premium_div_pay_btn.innerText = "$4.99"
+
+
+        premium_div.append(premium_div_cancelbtn)
+        premium_div.append(premium_div_heading)
+        premium_div.append(premium_div_agwera)
+        premium_div.append(premium_div_butonsdiv)
+
+        premium_div_butonsdiv.append(premium_div_share_btn)
+        premium_div_butonsdiv.append(premium_div_ANlabel)
+        premium_div_butonsdiv.append(premium_div_pay_btn)
+        
+        
+        
+        
+        premium_div_cancelbtn.onclick = function(){
+            // document.body.removeChild(premium_div)
+            premium_div.style.display = "none"
+            premium_pay_div.style.display = "none";
+            window.history.pushState("","","/");
+        }
+
+
+
+
+        premium_div_share_btn.onclick = function(){
+            if(authed == "True"){
+                livedirect("/upgrade_account/referal/premium");
+            }
+            else if(authed == "False"){
+                livedirect("/login?redirect=/upgrade_account/referal/premium")
+            }
+            
+        }
+        premium_div_pay_btn.onclick = function(){
+            if(authed == "True"){
+                premium_pay_div.style.display = "block";
+            }
+            else if(authed == "False"){
+                livedirect("/login?redirect=/?redirect_act=buy_premium");
+            }
+            
+            // window.location.href = "/upgrade_account/buy/premium";
+
+        }
+        window.addEventListener("load",function(){
+            var paypal_butoni = document.getElementsByClassName("paypal_butoni")[0];
+            if(window.innerWidth < 800){
+                var scale_size = window.innerWidth / 300;
+                paypal_butoni.style.transform = `translate(-50%,-50%) scale(${scale_size},${scale_size})`;
+            }
+
+
+
+            if(redirect_act_reqArg == "buy_premium"){
+                premium_div.style.display = "block";
+                premium_pay_div.style.display = "block";
+            }
+        })
+
+        
+        var modzebnva = document.getElementById("modzebnva");
+        modzebnva.status = "done";
+        modzebnva.onclick = async function(){
+            console.log("sinking")
+            if(modzebnva.status == "done"){
+                if(saxeli_input.value.length < 1){
+                    erori("გთხოვთ შეიყვანოთ სახელი")
+                }
+                else if(gvari_input.value.length < 1){
+                    erori("გთხოვთ შეიყვანოთ გვარი")
+                }
+                else if(parseInt(asaki_filter_min.value) < 0){
+                    erori("გთხოვთ მიუთითოთ ვალიდური მინიმალური ასაკი")
+                }
+                else if(parseInt(asaki_filter_max.value) < 1){
+                    erori("გთხოვთ მიუთითოთ ვალიდური მაქსიმალური ასაკი")
+                }
+                else if(parseInt(asaki_filter_max.value) <= parseInt(asaki_filter_min.value)){
+                    erori("მაქსიმალური ასაკი უფრო დიდი უნდა იყოს ვიდრე მინიმალური")
+                }
+                // else if(!locations.concat(locations_en).concat(["ყველა"]).includes(document.getElementsByClassName("selected_region_filter")[0].value)){
+                //     erori("არავალიდური რეგიონი")
+                // }
+                
+                else{    
+                    modzebnva.innerText = "იძებნება...";
+                    modzebnva.status = "searching";
+
+                    let platform;
+                    if(screen.width < 1000){
+                        platform = "mobile";
+                    }   
+                    else{
+                        platform = "desktop";
+                    }
+                    let formdata = new FormData();
+
+                    let saxeli = document.getElementById("saxeli_input").value
+                    let gvari = document.getElementById("gvari_input").value
+
+                    // if(document.getElementById("profile_info") == undefined){
+                    if(true){
+                        formdata.append("saxeli",saxeli)
+                        formdata.append("gvari",gvari)
+                    }
+                    else{
+                        formdata.append("saxeli",token.encode(document.getElementById("saxeli_input").value))
+                        formdata.append("gvari",token.encode(document.getElementById("gvari_input").value))
+                    }
+                    
+                    
+                    let searchtoken = saxeli + ":::techsp:::" + gvari + ":::techsp:::"  + ranstr(50)
+
+                    let regioni = document.getElementsByClassName("selected_region_filter")[0].value
+                    let region;
+                    let region_datatype;
+
+                    if(locations.includes(regioni)){
+                        region_datatype = "ind"
+                        region = locations.indexOf(regioni) + ""
+                    }
+                    else if(locations_en.includes(regioni)){
+                        region_datatype = "ind_en";
+                        region = locations_en.indexOf(regioni) + ""
+                    }
+                    else{
+                        region_datatype = "txt";
+                        region = regioni;
+                    }
+                    
+                    
+                    formdata.append("platform",platform)
+                    formdata.append("searchtype","import")
+                    formdata.append("searchtoken",searchtoken)
+                    
+                    
+                    
+
+                    
+                    formdata.append("min_asaki",document.getElementById("asaki_filter_min").value)
+                    formdata.append("max_asaki",document.getElementById("asaki_filter_max").value)
+
+                    formdata.append("region",region)
+                    formdata.append("region_datatype",region_datatype)
+                    
+                    
+                    
+                    
+                    
+                    let f = await fetch("/search_data",
+                        {
+                            method : "POST",
+                            body : formdata
+                        })
+                    let dat = await f.text()
+
+
+                    
+
+                    
+                            
+                    modzebnva.innerText = "მოძებნა";
+                    if(dat == "no_more_free_searches"){
+                        premium_div.style.display = "block";
+                        // let premium_div = document.createElement("div");
+                        // premium_div.className = "premium_div";
+                        // document.body.append(premium_div);
+
+                        // let ixi = 0;
+
+                        // let premium_div_y_limit = window.innerHeight/ 2 ;
+
+
+                        // function premium_div_chamosvla_anim_f(){
+                        //     ixi += 0.05;
+                        //     console.log(ixi)
+
+                            
+
+                        //     if(ixi <= premium_div_y_limit ){
+                        //         premium_div.style.top = ixi + "px";
+                        //     }
+                        //     else{
+                        //         premium_div.style.top = premium_div_y_limit + "px";
+                        //         clearInterval(premium_div_chamosvla_anim_instance)
+                        //     }
+                        // }   
+
+                        // let premium_div_chamosvla_anim_instance = setInterval(premium_div_chamosvla_anim_f,1);
+
+
+
+
+
+                    }
+                    else{
+                        let dbsearch_results = document.createElement("div");
+                        dbsearch_results.className = "dbsearch_results";
+
+                        
+                        let dbsearch_results_cancelbtn = document.createElement("div");
+                        dbsearch_results_cancelbtn.className = "dbsearch_results_cancelbtn";
+                        let saxel_gvari_label = document.createElement("span");
+                        saxel_gvari_label.className = "saxel_gvari_label";
+
+                        let pirovnebata_raodenoba_label = document.createElement("span");
+                        pirovnebata_raodenoba_label.className = "pirovnebata_raodenoba_label";
+
+                        let darchenili_modzebnebi_label = document.createElement("span");
+                        darchenili_modzebnebi_label.className = "darchenili_modzebnebi_label"
+
+                        let darchenili_modzebnebi_label_agwera = document.createElement("span");
+                        darchenili_modzebnebi_label_agwera.className = "darchenili_modzebnebi_label_agwera";
+                        darchenili_modzebnebi_label_agwera.innerHTML = "უფასო მოძებნების ამოწურვის შემდეგ, მოძებნა შეგიძლიათ მხოლოდ <a href = '/upgrade_account' class = 'darchenili_modzebnebi_label_agwera_premiumA'>პრემიუმით</a>";
+                        darchenili_modzebnebi_label_agwera.style.opacity = "0";
+
+                        // let filter_button = document.createElement("div");
+                        // filter_button.className = "filter_button"
+
+
+
+                        document.body.append(dbsearch_results)
+
+                        dbsearch_results.append(dbsearch_results_cancelbtn)
+                        dbsearch_results.append(saxel_gvari_label)
+                        dbsearch_results.append(pirovnebata_raodenoba_label)
+                        dbsearch_results.append(darchenili_modzebnebi_label)
+                        // darchenili_modzebnebi_label.append(darchenili_modzebnebi_label_agwera)
+
+
+                        darchenili_modzebnebi_label.onmouseover = function(e){
+                            if(e.target == darchenili_modzebnebi_label){
+                                clearInterval(darchenili_modzebnebi_label_agwera.darchenili_modzebnebi_label_agwera_vanishanim_instance); 
+                                darchenili_modzebnebi_label_agwera.style.opacity = "1";
+                            }
+                            
+                        }
+
+                        
+                        darchenili_modzebnebi_label.onmouseleave = function(){
+                            if(darchenili_modzebnebi_label_agwera.style.opacity ==  "1"){
+                                let ixi = 1;
+                                function darchenili_modzebnebi_label_agwera_vanishanim(){
+                                    ixi+= -0.01;
+                                    darchenili_modzebnebi_label_agwera.style.opacity = ixi + "";
+                                    if(ixi <= 0){
+                                        darchenili_modzebnebi_label_agwera.style.opacity = "0";
+                                        clearInterval(darchenili_modzebnebi_label_agwera.darchenili_modzebnebi_label_agwera_vanishanim_instance);   
+                                    }
+                                }
+                                darchenili_modzebnebi_label_agwera.darchenili_modzebnebi_label_agwera_vanishanim_instance = setInterval(darchenili_modzebnebi_label_agwera_vanishanim,1);
+                            }
+                            
+                        }
+                        
+                        
+                        // dbsearch_results.append(filter_button)
+                        
+
+                        let results_pardiv_innerHTML;
+                        
+
+                        
+                        function gauqmeba(e){
+                            modzebnva.status = "done";
+                            let pars = []
+                            // dbsearch_results dbsearch_results_cancelbtn
+                            let curpar = e.target;
+                            
+                            while(curpar != null){
+                                pars.push(curpar)
+                                curpar = curpar.parentNode;
+                            }
+                            if( ((e.target != modzebnva && !pars.includes(dbsearch_results)) || e.target == dbsearch_results_cancelbtn) && !e.target.className.includes("result_row_morebtn") && !e.target.className.includes("ukan_dabruneba_btn")  ){
+                                document.body.removeChild(dbsearch_results)
+                                document.body.removeEventListener("click",gauqmeba)
+                            }
+                            
+                        }
+                        document.body.addEventListener("click",gauqmeba)
+                        
+
+                        saxel_gvari_label.innerText = document.getElementById("saxeli_input").value + " " + document.getElementById("gvari_input").value
+
+                        
+                        let data;
+                        let results_pardiv;
+                        
+                        results_pardiv = document.createElement("div");
+                        results_pardiv.className = "results_pardiv";
+                        
+                        results_pardiv.currentview = "scrolling_rows";
+
+                        dbsearch_results.append(results_pardiv);
+                        function sqrolsave(){
+                            results_pardiv.scr = results_pardiv.scrollTop;
+                        }
+                        results_pardiv.scr = 0;
+
+                        let rows_observer;
+                        let obj_data;
+                        function result_morebtn_f(obj_data){
+                            // results_pardiv_innerHTML =  results_pardiv.innerHTML
+                            for(let i of document.getElementsByClassName("result_row_morebtn")){
+                                
+                                let piradobis_nomeri = i.getAttribute("piradobis_nomeri") + "";
+
+                                // let monac = data[1][piradobis_nomeri];
+                                let monac = obj_data[piradobis_nomeri];
+
+
+                                i.onclick = function(){
+                                    results_pardiv.removeEventListener("scroll",sqrolsave);
+                                    
+                                    
+                                    let save_row_btn_style;
+                                    if(authed == "True"){
+                                        save_row_btn_style = "";
+                                    }
+                                    else{
+                                        save_row_btn_style = "display:none;";
+                                    }
+                                    
+
+                                    results_pardiv.innerHTML = `
+
+                                        <div class = "results_navbar">
+                                            <div class = "ukan_dabruneba_btn">
+                                                უკან
+                                            </div>
+                                            <div class = "savecanvas_par">
+                                                <canvas style = "${save_row_btn_style}" class = "save_row" width = "32" height = "32">
+                                                </canvas>
+                                            </div>
+                                                
+                                        </div>
+
+                                        
+
+
+                                        <p class = "more_info_p">
+                                            💳სახელი გვარი : ${monac["saxeligvari"]}<br>\n
+                                                ⚥ სქესი : ${monac["sqesi"]}<br>\n
+                                            🎂ასაკი : ${monac["asaki"]}<br>\n
+                                            📅დაბადების თარიღი : ${monac["dabadebis_tarigi"]}<br>\n
+                                            👨მამა : ${monac["mama"]}<br>\n
+                                            📌საცხოვრებელი ქუჩა : ${monac["sacxovrebeli_qucha"]}<br>\n
+                                            📍რეგიონი : ${monac["regioni"]}<br>\n
+                                        </p>
+                                    `;
+                                    results_pardiv.currentview = "more_info"
+                                    
+                                    
+                                    let save_row_btn= document.getElementsByClassName("save_row")[0]
+                                    save_row_btn.setAttribute("saved",monac["saved_bool"])
+                                    save_row_btn.ctx = save_row_btn.getContext("2d");
+
+                                    save_row_btn.ctx.moveTo(1,1) // 1,30
+
+                                    if(monac["saved_bool"] == "true"){
+                                        save_row_btn.ctx.fillStyle = "#000000";
+                                    }
+                                    else{
+                                        save_row_btn.ctx.fillStyle = "#E5D9D9";
+                                    }
+                                    
+                                    save_row_btn.ctx.lineWidth = 2;
+                                    save_row_btn.ctx.strokeStyle = "#000000";
+                                    
+                                    save_row_btn.ctx.lineTo(30,1) // 30,30
+                                    save_row_btn.ctx.lineTo(30,30) // 30,1
+                                    // save_row_btn.ctx.moveTo(30,30) // 30,1
+
+                                    save_row_btn.ctx.lineTo(15,20) //15 ,11
+                                    save_row_btn.ctx.lineTo(1,30) //1,1
+                                    // save_row_btn.ctx.moveTo(1,30) // 1,1
+
+
+                                    save_row_btn.ctx.lineTo(1,1) // 1,30
+                        
+                            
+                                    save_row_btn.ctx.fill()
+                                    save_row_btn.ctx.stroke()
+                                    // 
+                                    
+                                    
+
+                                    
+                                        
+
+                                    document.getElementsByClassName("ukan_dabruneba_btn")[0].onclick = function(){
+                                        results_pardiv.innerHTML = results_pardiv_innerHTML
+                                        results_pardiv.scrollTop = results_pardiv.scr;
+                                        results_pardiv.addEventListener("scroll",sqrolsave);
+                                        if(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1].getAttribute("last_row") != "true"){
+                                            console.log("backvzervirdeba")
+                                            rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                                        }
+                                        results_pardiv.currentview = "scrolling_rows";
+                                        
+                                        result_morebtn_f(obj_data)
+                                    }
+                                    save_row_btn.onclick = function(e){
+                                        let x = e.offsetX;
+                                        let y = document.getElementsByClassName("save_row")[0].getBoundingClientRect().height - e.offsetY;
+                                        
+                                        let an_y = 20
+                                        
+                                        
+                                        
+
+                                        let c = 21
+
+                                        
+                                        //(y/x) > (11/15) ||  (y/x) > (11/15)
+                                        // (   y > ((11/15) * x)     )        ||  
+                                        if(   (   y > ((11/15) * x)     )        ||        (   y > (   ( -(11/15) * x   )   + c)     )        ){
+                                            
+                                            // setInterval(anim_inter_init,100)
+                                            // console.log("deivid")
+
+                                        }
+                                        
+                                        
+
+                                        
+
+                                        // console.log( x + " , " + y  + ", " + (y/x) +  " , " +  pitagor)
+
+                                    }
+                                    save_row_btn.onmousemove = function(e){
+                                        let x = e.offsetX;
+                                        let y = document.getElementsByClassName("save_row")[0].getBoundingClientRect().height - e.offsetY;
+                                        let pitagor = ((x**2) + (y ** 2) ) ** (1/2)
+                                        
+                                        
+                                        let c = 21
+                                        
+                                        //(y/x) > (11/15) ||  (y/x) > (11/15)
+                                        // (   y > ((11/15) * x)     )        ||  
+                                        
+                                        if(   (   y > ((11/15) * x)     )        ||        (   y > (   ( -(11/15) * x   )   + c)     )        ){
+                                            
+                                            save_row_btn.style.cursor = "pointer";
+                                            save_row_btn.style.opacity = "0.7";
+                                        }
+                                        else{
+                                            save_row_btn.style.cursor = "default";
+                                            save_row_btn.style.opacity = "1";
+                                        }
+                                        
+                                        
+
+                                        
+
+                                        // console.log( x + " , " + y  + ", " + (y/x) +  " , " +  pitagor)
+
+                                    }
+                                    function save_row_f(){
+                                        // #E5D9D9
+                                        let shkala = 0.1
+                                        let shkala_x = 0.001;
+
+                                        let mshkala = 1.5;
+                                        let mshkala_x = 0.01;
+                                        function anim_inter_init(){
+
+                                            // save_row_btn.ctx.clearRect(2,2,27,27);
+                                            // save_row_btn.ctx.beginPath()
+                                            // // save_row_btn.ctx = save_row_btn.getContext("2d");
+
+                                            // save_row_btn.ctx.strokeStyle = "#FF0000";
+                                            // save_row_btn.ctx.moveTo(30,30)
+                                            // save_row_btn.ctx.lineTo(15,an_y);
+                                            // save_row_btn.ctx.lineTo(1,30)
+                                            // save_row_btn.ctx.stroke()
+                                            // an_y+=-0.1;
+                                            // console.log(an_y)
+
+                                            // vahahaaa
+                                            if(shkala <= 1.3 ){
+                                                    save_row_btn.style.transform = `translate(-50%,-50%) scale(${shkala})`;
+                                                    // save_row_btn.style.width = `${shkala * 35}px`;
+                                                        
+                                                    shkala+= shkala_x;
+                                                    shkala_x+=0.002;
+                                                    
+                                            }
+                                            else{
+                                                if(mshkala >= 1){
+                                                    save_row_btn.style.transform = `translate(-50%,-50%) scale(${mshkala})`;
+
+                                                    mshkala+= -mshkala_x;
+                                                    mshkala_x+- 0.002;
+                                                }
+                                                else{
+                                                    
+                                                    let metodi;
+                                                    if(save_row_btn.getAttribute("saved") == "false"){
+                                                        save_row_btn.setAttribute("saved","true")
+
+                                                        metodi = "POST"
+                                                        monac["saved_bool"] = "true"
+
+
+
+                                                    }
+                                                    else{
+                                                        save_row_btn.setAttribute("saved","false")
+
+                                                        save_row_btn.ctx.fillStyle = "#E5D9D9";
+                                                        save_row_btn.ctx.fill()
+                                                        // save_row_btn.ctx.lineWidth = 2;
+                                                        save_row_btn.ctx.stroke()
+
+                                                        metodi = "DELETE"
+
+                                                        monac["saved_bool"] = "false"
+
+                                                    }
+                                                    let forma = new FormData()
+
+                                                    forma.append("piradobis_nomeri",piradobis_nomeri)
+
+                                                    fetch("/save_search",{
+                                                        method : metodi,
+                                                        body : forma
+                                                    }).then(async function(res){
+                                                        let response = await res.text()
+                                                        if(response == "success"){
+                                                            if(metodi == "POST"){
+                                                                erori("პიროვნება შეინახა წარმატებით✔️","dark")
+                                                                
+                                                            }
+                                                            else if(metodi == "DELETE"){
+                                                                erori("პიროვნება ამოიშალა შენახვებიდან წარმატებით","dark")
+                                                            }
+                                                        }
+                                                        
+                                                        
+                                                    }).catch(
+                                                        async function(){
+                                                            erori("გთხოვთ შეამოწმოთ ინტერნეტ კავშირი","dark")
+                                                        }
+                                                    )
+                                                    save_row_btn.style.cursor = "pointer";
+                                                    save_row_btn.style.opacity = "0.7";
+
+                                                    clearInterval(row_shenaxva_interinstance);
+                                                    
+                                                }
+                                            }
+                                                
+
+
+                                        }
+                                        save_row_btn.parentNode.style.backgroundColor = "";
+                                        
+                                        
+                                        let row_shenaxva_interinstance = setInterval(anim_inter_init,1)
+                                        // save_row_btn.ctx.fillStyle = "#E5D9D9";
+                                        // save_row_btn.ctx.fill()
+                                        // save_row_btn.ctx.lineWidth = 2;
+                                        save_row_btn.ctx.stroke()
+                                        
+
+                                    }
+                                    function tachstart(e){
+                                        
+                                        save_row_btn.parentNode.style.backgroundColor = "rgb(203, 197, 197)";
+                                        save_row_btn.ctx.fillStyle = "#000000";
+                                        save_row_btn.ctx.fill()
+                                        // save_row_btn.ctx.lineWidth = 2;
+                                        save_row_btn.ctx.stroke()
+                                        
+
+
+                                    }
+                                    if(window.innerWidth < 800){
+                                        save_row_btn.addEventListener("touchstart",tachstart)
+                                        save_row_btn.addEventListener("touchend",save_row_f)
+                                    }
+                                    else{
+                                        save_row_btn.addEventListener("mousedown",tachstart)
+                                        save_row_btn.addEventListener("mouseup",save_row_f)
+                                    }
+                                    
+
+                                    
+                                    
+
+                                    save_row_btn.onmouseleave = function(){
+                                        save_row_btn.style.cursor = "default";
+                                        save_row_btn.style.opacity = "1";
+                                    }
+
+                                }
+                            }
+                        }
+                        let darchenili_modzebnebi;
+                        if(JSON.parse(dat)[0] == "notfound"){
+                            results_pardiv.innerHTML = "<center>ინფორმაცია ვერ მოიძებნა</center>";
+                            darchenili_modzebnebi = JSON.parse(dat)[1]
+
+                        }
+                        else{
+                            data = JSON.parse(dat)
+                            obj_data = data[1];
+                            rows_observer = new IntersectionObserver(function(entries){
+                                if(entries[0].isIntersecting == true){
+                                    let formdata = new FormData();
+                                    let searchtype_from = entries[0].target.className.split(" ")[1].split("_")[2]
+                                    formdata.append("saxeli",saxeli)
+                                    formdata.append("gvari",gvari)
+                                    formdata.append("platform",platform)
+                                    formdata.append("searchtype","add")
+                                    formdata.append("searchtype_from",searchtype_from)
+                                    formdata.append("searchtoken",searchtoken)
+
+
+                                    let regioni = document.getElementsByClassName("selected_region_filter")[0].value
+                                    let region;
+                                    let region_datatype;
+
+                                    if(locations.includes(regioni)){
+                                        region_datatype = "ind"
+                                        region = locations.indexOf(regioni) + ""
+                                    }
+                                    else if(locations_en.includes(regioni)){
+                                        region_datatype = "ind_en";
+                                        region = locations_en.indexOf(regioni) + ""
+                                    }
+                                    else{
+                                        region_datatype = "txt";
+                                        region = regioni;
+                                    }
+
+
+                                    formdata.append("min_asaki",document.getElementById("asaki_filter_min").value)
+                                    formdata.append("max_asaki",document.getElementById("asaki_filter_max").value)
+
+                                    formdata.append("region",region)
+                                    formdata.append("region_datatype",region_datatype)
+                                    
+                                                
+                                    // <div class="lds-dual-ring"></div>
+                                    let loading_element = document.createElement("div");
+                                    loading_element.className = "lds-dual-ring";
+
+                                    results_pardiv.append(loading_element)
+                                    rows_observer.unobserve(entries[0].target)
+                                    fetch("/search_data",{
+                                        method : "POST",
+                                        body : formdata
+                                    }).then(async function(res){
+                                        let rawdata = await res.text();
+                                        // rows_observer.unobserve(entries[0].target)
+                                        for(let i of document.getElementsByClassName("lds-dual-ring")){
+                                            results_pardiv.removeChild(i)
+                                        }
+                                        if(JSON.parse(rawdata)[0] == "notfound"){
+                                            document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1].setAttribute("last_row","true")
+                                        }
+                                        else{
+                                            let data = JSON.parse(rawdata);
+                                            
+                                            
+                                            obj_data = Object.assign(obj_data,  data[1]  )
+                                            if(results_pardiv.currentview == "more_info"){
+                                                results_pardiv_innerHTML += data[0]
+                                            }
+                                            else if(results_pardiv.currentview == "scrolling_rows"){
+                                                results_pardiv.innerHTML += data[0]
+                                                results_pardiv_innerHTML = results_pardiv.innerHTML
+                                                result_morebtn_f(obj_data)
+
+                                                let data1_zoma = 0
+                                                for(let i in data[1]){
+                                                    data1_zoma+=1;
+                                                }
+                                                if(data1_zoma == 10){
+                                                    rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                                                }
+                                                // rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                                            }
+                                            
+                                        }
+                                        
+                                        
+                                    })
+                                }
+                                else{
+                                }
+                            },{ threshold : [0] });
+                                
+                            results_pardiv.innerHTML = data[0];
+
+                            pirovnebata_raodenoba_label.innerText = data[2] + " შედეგი"
+
+                            results_pardiv.addEventListener("scroll",sqrolsave);
+
+                            if(document.getElementsByClassName("result_row").length == 10){
+                                rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                            }
+
+                            darchenili_modzebnebi = JSON.parse(dat)[3]
+                            
+                        }
+                        if(premium == "False"){
+                            darchenili_modzebnebi_label.innerText = `დარჩენილია : ${darchenili_modzebnebi} უფასო მოძებნა`;
+                        }
+                        else if(premium == "True"){
+                            darchenili_modzebnebi_label.innerText = ""
+                        }
+                        darchenili_modzebnebi_label.append(darchenili_modzebnebi_label_agwera)
+                        
+                        let ixi = 0;
+                        let iyi = 0.03;
+                        let lmitcord = window.innerHeight/ 2 ;//bgvideo.getBoundingClientRect().height/2;
+                        
+                        function chamosvla(){
+                            
+                            if(ixi <= lmitcord){
+                                ixi+=iyi;
+                                iyi+=0.05;
+                                dbsearch_results.style.top = ixi + "px";
+                            }
+                            else{
+                                ixi = lmitcord;
+                                dbsearch_results.style.top = ixi + "px";
+                                if(JSON.parse(dat)[0] == "notfound"){
+
+                                }
+                                else{
+                                    
+                                    results_pardiv_innerHTML =  results_pardiv.innerHTML
+                                    result_morebtn_f(obj_data);
+                                }
+                                
+                                clearInterval(chamosvla_inter)
+                            }
+                            
+                            
+                            
+
+                        }
+                        let chamosvla_inter = setInterval(chamosvla,1)
+                    }
+                }
+            }
+        
+
+            }
+
+            
+        
+    </script>
+    
+</body>
+</html>

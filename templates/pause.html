@@ -1,0 +1,125 @@
+a<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian Base 2016</title>
+    <link href="/static/pause.css" rel="stylesheet" >
+    <link href="/static/allpage.css" rel="stylesheet" >
+    <link rel="icon" href = "/static/gb_sym.png">
+    
+    <script src="/static/jquery.js"></script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1436134057225682"
+     crossorigin="anonymous"></script>
+
+    
+    <link href = "/static/eror.css" rel="stylesheet">
+</head> 
+<body style="height:100%">
+    {{navbar_authed}}
+    {{bg}}
+    <div id="root">
+        <!-- {{unauthed_reglog_mob}}
+        
+        {{unauthed_reglog}}
+         -->
+        <div id = "maindvi">
+            <div id = "error_heading">საიტი მოვლის პროცესშია</div>
+            <div id = "magnifying_glass_div"></div>
+        
+        </div>
+    </div>
+    <script src = "/static/eror.js"></script>
+    <script>
+        
+        if(window.innerWidth > 800){
+            
+            if(document.getElementById("profile_info") == undefined){
+                avtorizacia.onclick = function(){
+                    // window.location.href = "/login"
+                    livedirect("/login")
+                    }
+                
+                registracia.onclick = function(){  
+                    // window.location.href = "/signup";
+                        livedirect("/signup")
+                    }
+            }
+            
+                
+
+            
+        }
+        else{
+            if(document.getElementById("profile_info") != undefined){
+                
+            }
+            if(document.getElementById("mob_avtorizacia") != undefined && document.getElementById("mob_registracia") != undefined){
+                document.getElementById("mob_avtorizacia").onclick = function(){
+                    // window.location.href = "/login";
+                    livedirect("/login")
+                }
+                
+                document.getElementById("mob_registracia").onclick = function(){  
+                    // window.location.href = "/signup";
+                    livedirect("/signup")
+
+                }
+                document.getElementById("mobile_navbar_btn").state = "pass";
+                document.getElementById("mobile_navbar_btn").status = "closed";
+                document.getElementById("mobile_navbar_cancell_btn").onclick = function(){
+                if(document.getElementById("mobile_navbar_btn").status == "open"){
+                        
+                        document.getElementById("mobile_navbar").style.left = "-100%";
+
+
+
+
+
+
+                        document.getElementById("mobile_navbar_btn").status = "closed";
+                    }
+                }
+
+            document.getElementById("mobile_navbar_btn").onclick = 
+                function(){
+                    if(document.getElementById("mobile_navbar_btn").state == "pass"){
+                            document.getElementById("mobile_navbar_btn").state = "opening";
+                            let marcx = -100;
+                            let x = 0.03;
+                            let y = 0.08;
+                            function mobile_navbar_slide_f(){
+                                if(marcx <= 0){
+                                    marcx+=x;
+                                    x+=y;
+                                    document.getElementById("mobile_navbar").style.left = marcx+"%";
+                                }
+                                else{
+                                    marcx=0;
+                                    document.getElementById("mobile_navbar").style.left =  marcx+"%";
+                                    clearInterval(mobile_navbar_slide_inter);
+                                    document.getElementById("mobile_navbar_btn").state = "pass"
+                                    document.getElementById("mobile_navbar_btn").status = "open";
+                                    
+                                }
+                            
+                        }
+                        let mobile_navbar_slide_inter = setInterval(mobile_navbar_slide_f,1);
+                    }
+                }
+            }
+            
+            
+            
+
+            
+            
+        }
+
+        
+    </script>
+    
+</body>
+</html>

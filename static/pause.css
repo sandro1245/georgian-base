@@ -1,0 +1,189 @@
+
+body{
+    overflow-y: hidden;
+    /* margin: 0px;
+    padding: 0px; */
+}
+@media only screen and (min-width:800px){
+    #mobile_navbar_btn{
+        display: none;
+    }
+    .account_access_label{
+        display: inline;
+        /* position: relative; */
+        position: absolute;
+        /* background-color: black; */
+        color: white;
+        /* left: 74%; */
+        /* top: -70px; */
+        top:3%;
+        margin-left: 24px;
+        cursor: pointer;
+        z-index: 4;
+
+    }
+    .account_access_label::after{
+        content : "";
+        position: absolute;
+        display: inline;
+        /* width:100%; */
+        top:140%;
+
+        height: 4px;
+        background-color: blue;
+        left: 0%;
+        transition: width 0.3s,left 0.3s;
+        width: 0px;
+        left: 50%;
+        
+        
+
+    }
+    .account_access_label:hover::after{
+        width: 100%;
+        left: 0%;
+    }
+    #registracia{
+        left: 73%;
+    }
+    #avtorizacia{
+        left: 85%;
+    }
+
+    
+
+    
+    
+
+    
+    
+
+    #maindvi{
+        background-color: white;
+        width: 40%;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 5px;
+    }
+    #error_heading{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        width: fit-content;
+        top: 20%;
+        font-size: 20px;
+    }
+    #magnifying_glass_div{
+        background-image: url("/static/pause.png");
+        width: 40%;
+        aspect-ratio: 1/1;
+        background-size: 100% 100%;
+        position: relative;
+        left: 50%;
+        margin-top: 15%;
+        transform: translate(-50%,0%);
+
+
+    }
+}
+@media only screen and (max-width:800px){
+    #mobile_navbar_btn{
+        display: block;
+        position: absolute;
+        left: 90%;
+        top:30px;
+        transform: translate(-50%,-50%);
+        width: fit-content;
+        /* background-color: green; */
+        
+    }
+    #mobile_navbar{
+        position: fixed;
+        left: -100%;
+        
+        width: 100%;
+        height: 100%;
+        top:0%;
+        margin: 0;
+        padding: 0;
+        background-color: grey;
+        z-index: 15;
+    }
+    .account_access_label{
+        display: none;
+    }
+    #mobile_navbar_cancell_btn{
+        background-image: url("/static/cancell.png");
+        background-size: 100% 100%;
+        background-position: center;
+        cursor: pointer;
+        position: absolute;
+        left: 100%;
+        top:0%;
+        width: 50px;
+        height: 50px;
+        z-index: 17;
+        transform: translate(-100%,0);
+    }
+    
+    #mob_registracia{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    #mob_registracia{
+        position: absolute;
+        left: 50%;
+        top:35%;
+        transform: translate(-50%,-50%);
+    }
+    #mob_avtorizacia{
+        position: absolute;
+        left: 50%;
+        top:65%;
+        transform: translate(-50%,-50%);
+    }
+
+
+
+
+
+
+
+
+    #maindvi{
+        background-color: white;
+        width: 80%;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 5px;
+    }
+    #error_heading{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        width: fit-content;
+        top: 20%;
+        font-size: 20px;
+        text-align: center;
+    }
+    #magnifying_glass_div{
+        background-image: url("/static/pause.png");
+        width: 70%;
+        aspect-ratio: 1/1;
+        background-size: 100% 100%;
+        position: relative;
+        left: 50%;
+        margin-top: 30%;
+        transform: translate(-50%,0%);
+
+
+    }
+}

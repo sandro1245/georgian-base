@@ -1,0 +1,394 @@
+body{
+    background-color: black;
+    /* overflow-x: hidden; */
+    z-index: -1;
+}
+#heading{
+    color:rgb(206, 18, 18);
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    /* top:5%; */
+    transform: translate(-50%,-50%);
+    
+    background-color: black;
+    text-align: center;
+
+}
+#bgvideo{
+    position: absolute;
+    left: 0%;
+    top:0%;
+    margin: 0;
+    padding: 0;
+}
+
+
+#credintal{
+    z-index: 10;
+    position: absolute;
+    color:red;
+    top:500px;
+    left: 50px;
+}
+#instruction_btn{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url("/static/depositphotos_181569108-stock-video-white-question-mark-icon-form.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    border-radius: 50% 50%;
+}
+
+#modzebnva{
+    position: absolute;
+    background-color: yellow;
+    width: fit-content;
+    padding: 10px 14px 10px 14px;
+    left: 50%;
+    top:80%;
+    transform: translate(-50%,-50%);
+    
+    /* width: 60px;
+    height: 20px; */
+}
+
+.dbsearch_results{
+    z-index: 10;
+    background-color: rgb(160, 160, 98);
+}
+.dbsearch_results_cancelbtn{
+    background-image: url("/static/cancell.png");
+    background-size: 100% 100%;
+    background-position: center;
+    cursor: pointer;
+}
+.result_row{
+    display: flex;
+    
+}
+.result_row_child{
+    background-color: white;
+    border:1px solid black;
+    padding: 5px;
+}
+@media only screen and (max-width:1000px){
+
+    html, body {
+        height: 100%;
+        /* overflow: hidden; */
+        /* overflow-x: hidden; */
+    }
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        /* overflow-x: hidden; */
+        position: relative;
+        height: fit-content;
+    }
+    #bgvideo{
+        /* height: 100%; */
+        /* height: 100px; */
+        width: 400%;
+        overflow: hidden;
+        display: block;
+        height: 100%;
+        object-fit: fill;
+        /* margin-left: -1220px; */
+        transform: translateX(-75%);
+
+    }
+    #heading{
+        top:50px;
+        font-size: 24px;
+    }
+    #maindiv{
+        position: absolute;
+        top:320px;
+        left:50%;
+        transform: translate(-50%,-50%);
+        z-index: 2;
+        background-color: rgb(125, 221, 114);
+        width: 80%;
+        height: 240px;
+        border-radius: 2px 2px;
+    }
+    #credintal{
+        top:500px;
+    }
+    input{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        margin-top: 40px;
+    }
+
+
+
+
+
+    .dbsearch_results{
+        
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        
+        width: 85%;
+        height: 400px;
+    }
+    .dbsearch_results_cancelbtn{
+        position: absolute;
+        left: 100%;
+        top:0%;
+        width: 40px;
+        height: 40px;
+        transform: translate(-100%,0%);
+        /* background-color: blue; */
+    }
+    .saxel_gvari_label{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        top:15%;
+        font-size:20px;
+    }
+    .results_pardiv{
+        position:absolute;
+        height: 250px;
+        background-color: rgb(229, 217, 217);
+        width: 85%;
+        top:60%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        overflow-y: auto;
+    }
+    .result_row{
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+    .result_row_morebtn{
+        background-color: rgb(10, 150, 10);
+        border-radius: 5px 5px 5px 5px;
+    }
+    .ukan_dabruneba_btn{
+        width: fit-content;
+        background-color: rgb(10, 150, 10);
+        border-radius: 5px 5px 5px 5px;
+        padding: 8px 8px 8px 8px;
+        margin: 10px 10px 10px 10px;
+        font-size: 14px;
+        position: sticky;
+        top: 0;
+        box-shadow: 5px 5px 5px grey;
+
+    }
+    .more_info_p{
+        margin: 5px 0px 5px 13px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        word-wrap: break-word;
+    }
+    #mobile_navbar_btn{
+        display: block;
+        position: relative;
+        left: 90%;
+        top:30px;
+        transform: translate(-50%,-50%);
+        width: fit-content;
+        /* background-color: green; */
+        
+    }
+    #mobile_navbar{
+        position: fixed;
+        left: -100%;
+        
+        width: 100%;
+        height: 100%;
+        top:0%;
+        margin: 0;
+        padding: 0;
+        background-color: grey;
+        z-index: 15;
+    }
+    .account_access_label{
+        display: none;
+    }
+    #mobile_navbar_cancell_btn{
+        background-image: url("/static/cancell.png");
+        background-size: 100% 100%;
+        background-position: center;
+        cursor: pointer;
+        position: absolute;
+        left: 100%;
+        top:0%;
+        width: 50px;
+        height: 50px;
+        z-index: 17;
+        transform: translate(-100%,0);
+    }
+    
+    #mob_registracia{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+}
+@media only screen and (min-width:800px){
+    #bgvideo{
+        width: 100%;
+    }
+    #heading{
+        top:5%;
+        font-size: 40px;
+    }
+    #maindiv{
+        position: absolute;
+        top:350px;
+        left:50%;
+        transform: translate(-50%,-50%);
+        z-index: 2;
+        background-color: rgb(125, 221, 114);
+        width: 80%;
+        height: 300px;
+        border-radius: 2px 2px;
+    }
+    input{
+        position: absolute;
+        top: 45%;
+        transform: translate(-50%,-50%);
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 15px;
+        /* margin-top: 40px; */
+    }
+    #saxeli_input{
+        left: 30%;
+    }
+    #gvari_input{
+        left: 70%;
+    }
+    #credintal{
+        top:80%;
+        font-size: 24px;
+        background-color: black;
+    }
+
+    {
+
+    }
+    button,#modzebnva,.dbsearch_results_cancelbtn,.result_row_morebtn,.ukan_dabruneba_btn{
+        transition: opacity 0.3s;
+        cursor: pointer;
+        opacity: 1;
+    }
+    button:hover,#modzebnva:hover,.dbsearch_results_cancelbtn:hover,.result_row_morebtn:hover,.ukan_dabruneba_btn:hover{
+        opacity: 0.7;
+    }
+    
+
+
+    .dbsearch_results{
+        
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        /* background-color: yellow; */
+        /* width: 70%; */
+        width: 40%;
+        height: 65%;
+        /* height: 100px; */
+    }
+    .dbsearch_results_cancelbtn{
+        position: absolute;
+        left: 100%;
+        top:0%;
+        width: 40px;
+        height: 40px;
+        transform: translate(-100%,0%);
+        /* background-color: blue; */
+    }
+    .saxel_gvari_label{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        top:15%;
+        font-size:30px;
+    }
+    .results_pardiv{
+        position:absolute;
+        height: 250px;
+        background-color: rgb(229, 217, 217);
+        width: 85%;
+        top:60%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        overflow-y: auto;
+    }
+    .result_row{
+        margin-top: 15px;
+        margin-left: 5px;
+        font-size: 20px;
+    }
+    .result_row_morebtn{
+        background-color: rgb(10, 150, 10);
+        border-radius: 5px 5px 5px 5px;
+    }
+    .ukan_dabruneba_btn{
+        width: fit-content;
+        background-color: rgb(10, 150, 10);
+        border-radius: 5px 5px 5px 5px;
+        padding: 8px 8px 8px 8px;
+        margin: 10px 10px 10px 10px;
+        font-size: 14px;
+        position: sticky;
+        top: 0;
+        box-shadow: 5px 5px 5px grey;
+
+    }
+    .more_info_p{
+        margin: 5px 0px 5px 13px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        word-wrap: break-word;
+    }
+    #mobile_navbar_btn{
+        display: none;
+    }
+    .account_access_label{
+        display: inline;
+        position: relative;
+        background-color: black;
+        color: white;
+        left: 74%;
+        top: 10px;
+        margin-left: 24px;
+        cursor: pointer;
+
+    }
+    .account_access_label::after{
+        content : "";
+        position: absolute;
+        display: inline;
+        /* width:100%; */
+        top:140%;
+
+        height: 4px;
+        background-color: blue;
+        left: 0%;
+        transition: width 0.3s,left 0.3s;
+        width: 0px;
+        left: 50%;
+        
+        
+
+    }
+    .account_access_label:hover::after{
+        width: 100%;
+        left: 0%;
+    }
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian Base 2016</title>
+    <link href="/static/referal_premium.css" rel="stylesheet" >
+    <link href="/static/allpage.css" rel="stylesheet" >
+    <link rel="icon" href = "/static/gb_sym.png">
+    
+    <script src="/static/jquery.js"></script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1436134057225682"
+     crossorigin="anonymous"></script>
+
+    
+    <link href = "/static/eror.css" rel="stylesheet">
+    <meta property="og:url"           content="http://georgianbase.pagekite.me/" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="a : a" />
+        <meta property="og:description"   content="მოიძიე ინფორმაცია ადამიანზე" />
+        <meta property="og:image"         content="/static/gb_sym.png" />
+</head> 
+<body style="height:100%">
+    {{navbar}}
+    {{navbar_authed}}
+    {{bg}}
+    <div id="root">
+        
+        <h2 id = "heading">პრემიუმი</h2>
+        <div id = "main_div">
+            {{referal_premium_maindiv}}
+        </div>
+        <!-- <div style="background-color: white;width:100%;height: 400px;position:absolute;top:100%; left:0%"></div> -->
+
+    </div>
+    <script src = "/static/eror.js"></script>
+    <script src = "/static/socket.io.js"></script>
+    <script>
+
+
+        var kursf_refinvites_count = {{kursf_refinvites_count}}
+        
+
+        var soketi = io();
+
+        if(kursf_refinvites_count < 40){
+            soketi.addEventListener("connect",function(){
+                soketi.emit("premium_referal_invite_broadcastroom_join",data={"c_user" : kuki.c_user, "xs" : kuki.xs})
+            })
+        }
+        
+
+        soketi.addEventListener("message",function(data){
+            console.log(data)
+            let dat = JSON.parse(data);
+            
+            if(dat["type"] == "premium_referal_invite_countdown_increase"){
+                countdown_increase();
+            }
+            
+        })
+
+        var invite_link_textinput = document.getElementById("invite_link_textinput");
+        var invite_link_copybtn = document.getElementById("invite_link_copybtn");
+        invite_link_copybtn.onclick = function(){
+
+            if(window.innerWidth < 800){
+                invite_link_textinput.select();
+                invite_link_textinput.setSelectionRange(0, 99999);
+            }
+            
+
+            window.navigator.clipboard.writeText(invite_link_textinput.value);
+            erori("ლინკი დაკოპირდა✔️")
+        }
+
+
+
+
+        document.getElementById('facebook_sharebtn').onmouseenter = function(){
+            document.getElementById("fb_svg_path").setAttribute("fill","#78c3bc")
+        }
+        document.getElementById('facebook_sharebtn').onmouseleave = function(){
+            document.getElementById("fb_svg_path").setAttribute("fill","#3D5899")
+        }
+
+
+
+        document.getElementById("twitter_sharebtn").onmouseenter = function(){
+            path3236.style.fill = "#78C3BC"
+        }
+        document.getElementById("twitter_sharebtn").onmouseleave = function(){
+            path3236.style.fill = "#1D9BF0"
+        }
+
+
+        document.getElementById("linkedin_sharebtn").onmouseenter = function(){
+            path847.style.fill = "#78C3BC";
+            path849.style.fill = "#78C3BC";
+            path851.style.fill = "#78C3BC";
+            
+        }
+        document.getElementById("linkedin_sharebtn").onmouseleave = function(){
+            path847.style.fill = "#0066C8";
+            path849.style.fill = "#0066C8";
+            path851.style.fill = "#0066C8";
+        }
+
+
+
+        document.getElementById('facebook_sharebtn').onclick = function(){
+            window.location.href = `https://www.facebook.com/dialog/share?app_id=202127659076&display=popup&href=${invite_link_textinput.value}`;
+        }
+        document.getElementById('twitter_sharebtn').onclick = function(){
+            window.location.href = `https://twitter.com/intent/tweet?text=${invite_link_textinput.value}`;
+        }
+        document.getElementById('linkedin_sharebtn').onclick = function(){
+            window.location.href = `https://www.linkedin.com/sharing/share-offsite/?url=${invite_link_textinput.value}`;
+        }
+
+
+
+
+
+        var invites_count = document.getElementById("invites_count");
+        invites_count.status = "done";
+
+        // var countdown_queue = []
+        var countdown_queue = 0;
+        
+
+        invites_count.style.width = (document.getElementsByClassName("invites_count_invited")[0].getBoundingClientRect().width + invites_count_net.getBoundingClientRect().width) + "px";
+
+
+        invites_count.count = parseInt(kursf_refinvites_count);
+        var audio = new Audio("/static/countdown.mp3");
+        
+        function countdown_increase(){
+            // invites_count_invited
+            if(invites_count.status == "done"){
+                invites_count.status = "moving"
+                
+                let current_cd_el = document.getElementsByClassName("invites_count_invited")[0];
+                let new_cd_el = document.createElement("div");
+                new_cd_el.className = "new_cd_el"
+                new_cd_el.style = `
+                    position: absolute;
+                    top: -50%;
+                    left: 0%;
+                    transform: translate(0%,-50%);
+
+                `;
+                new_cd_el.innerText = invites_count.count + 1;
+                invites_count.prepend(new_cd_el)
+                invites_count.style.width = (document.getElementsByClassName("new_cd_el")[0].getBoundingClientRect().width + invites_count_net.getBoundingClientRect().width) + "px";
+
+                let new_x = -50;
+                let veloc = 1;
+                var audio = new Audio("/static/countdown.mp3");
+                audio.play()
+                function countdown_increase_anim(){
+
+                    if(new_x < 50){
+                        new_cd_el.style.top = new_x + "%";
+                        current_cd_el.style.top = (new_x + 100) + "%";
+
+
+                        new_x += veloc; 
+                        if(countdown_queue == 0){
+                            veloc +=-0.005025;
+                        }
+                        
+                    }
+                    else{
+                        let new_x = 50;
+                        new_cd_el.style.top = new_x + "%";
+                        current_cd_el.style.top = (new_x + 100) + "%";
+                        invites_count.count++;
+
+                        current_cd_el.className = "";
+                        current_cd_el.style.display = 'none'
+                        new_cd_el.className = "invites_count_invited";
+
+                        
+
+                        invites_count.status = "done";
+                        clearInterval(countdown_increase_anim_instance);
+
+                        if(invites_count.count == 40){
+                            main_div.innerHTML = `
+                            <div>
+                                <div id ="premiumi_agebulia_checkmark"></div>
+                                <div id = "premiumi_agebulia_label">
+                                    პრემიუმი გააქტიურებულია
+                                </div>
+                            </div>
+                            `;
+                            profile_info.style.backgroundColor = "#cab333"
+                        }
+                        else{
+                            if(countdown_queue > 0){
+                                countdown_queue+=-1;
+                                countdown_increase();
+                            }
+                        }
+
+                        
+                    }
+                    
+
+                    
+                    
+                }
+                let countdown_increase_anim_instance = setInterval(countdown_increase_anim,1);
+
+                
+            }
+            else{
+                // countdown_queue.push()
+                countdown_queue+= 1;
+
+            }
+            
+
+            
+            
+
+        }
+        // countdown_increase()
+
+
+
+        
+        
+
+
+
+        // path3236 #1D9BF0
+
+        
+    </script>
+    
+</body>
+</html>

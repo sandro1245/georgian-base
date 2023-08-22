@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian base | ავტორიზაცია</title>
+    <link href = "/static/saved_searches.css" rel="stylesheet">
+    <link href = "/static/allpage.css" rel="stylesheet">
+    <link rel="icon" href = "/static/gb_sym.png">
+
+    
+    <link href = "/static/eror.css" rel="stylesheet">
+    
+</head>
+<body>
+    
+    {{navbar}}
+    
+    {{navbar_authed}}
+    {{bg}}
+    <div id="root">
+        <div id = "maindivi">
+            <div id = "upper_sect">
+                <h2 id = "shenaxulebi_heading">შენახულები</h2>
+
+                <select id = "sort_by_input">
+                    <option value = "axali">უახლესი</option>
+                    <option value = "dzveli">უძველესი</option>
+                    
+                </select>
+            </div>
+            <div id = "lower_sect">
+                {{results}}
+            </div>
+            
+        </div>
+    </div>
+    <script src = "/static/eror.js"></script>
+    <script>
+
+        if(document.getElementsByClassName("result_row").length == 0){
+            document.getElementById("sort_by_input").style.display = "none";
+        }
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) ) + min;
+        }
+
+        function ranstr(zoma,charls="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"){
+            let x = 0;
+            let pasuxi = ""
+            while(x < parseInt(zoma)){
+                pasuxi += charls[getRndInteger(0,charls.length-1)]
+                x++;
+            }
+            return pasuxi
+        }
+        var sort_by_input = document.getElementById("sort_by_input")
+
+        // let searchtoken = kuki.c_user + ":::techsp:::"  + ranstr(50)
+        let searchtoken = "{{searchtoken}}"
+
+        if(document.getElementsByClassName("result_row").length > 0){
+            document.getElementsByClassName("result_row")[0].style.borderWidth = "0px 0px 1px 0px";
+            document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length-1].style.borderWidth = "1px 0px 2px 0px";
+        }
+        
+        
+        var results_pardiv = document.getElementById("lower_sect");
+
+
+        if(document.getElementById("modzebna_redirect") != undefined){
+            modzebna_redirect.onclick = function(){
+                window.location.href = "/";
+            }
+        }
+
+        var html_data = results_pardiv.innerHTML;
+        
+        lower_sect.currentview = "scrolling_rows";
+
+
+        function row_shetrialeba(){
+            let parenti = document.getElementById("lower_sect");
+            // if(this.value == "dzveli"){
+            if(true){
+                let elements = document.getElementsByClassName("result_row")
+                let els = [];
+                for(let i of elements){
+                    els.push(i)
+                }
+                for(let i of els){
+                    
+                    // let parenti = i.parentNode;
+                    
+                    
+
+                    parenti.removeChild(i);
+                }
+                for(let i of els.reverse()){
+                    parenti.append(i)
+                }
+                
+
+            }
+            if(document.getElementsByClassName("result_row").length > 0){
+                document.getElementsByClassName("result_row")[0].style.borderWidth = "0px 0px 1px 0px";
+                
+            }
+        }
+
+        var obj_data = {{data}}
+
+        var reversed = "false";
+
+        // sort_by_input.onchange = row_shetrialeba;
+        sort_by_input.onchange = function(){
+            // searchtoken =  kuki.c_user + ranstr(80);
+            if(sort_by_input.value == "dzveli"){
+                reversed = "true";
+            }
+            else if(sort_by_input.value == "axali"){
+                reversed = "false";
+            }
+            let formdata = new FormData();
+            let searchtype_from = "0"; //entries[0].target.className.split(" ")[1].split("_")[2]
+            // formdata.append("searchtype","add")
+            // formdata.append("searchtype_from",searchtype_from)
+            // formdata.append("searchtoken",searchtoken)
+
+            let loading_element = document.createElement("div");
+            loading_element.className = "lds-dual-ring";
+
+            lower_sect.innerHTML = "";
+
+            
+            
+            lower_sect.append(loading_element)
+
+            loading_element.style.position = "absolute";
+            loading_element.style.top = ((loading_element.parentNode.getBoundingClientRect().height/2)  -  (loading_element.getBoundingClientRect().height/2) ) + "px" ;
+            
+
+            fetch(`/saved_searches?continuing=true&searchtoken=${searchtoken}&searchfrom=${searchtype_from}&reversed=${reversed}`,{
+                method : "GET"
+                // ,body : formdata
+            }).then(async function(res){
+                let rawdata = await res.text();
+                for(let i of document.getElementsByClassName("lds-dual-ring")){
+                    lower_sect.removeChild(i)
+                }
+                if(rawdata == "notfound"){
+                    document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1].setAttribute("last_row","true")
+                }
+                else{
+                    let data = JSON.parse(rawdata);
+                    
+                    // lower_sect.innerHTML += data[0]
+                    lower_sect.innerHTML = data[0]
+                    html_data = results_pardiv.innerHTML
+                    console.log("varislov")
+                    
+                    // obj_data = Object.assign(obj_data,  data[1]  )
+                    obj_data = data[1]
+                    result_morebtn_f(obj_data)
+                    let data1_zoma = 0
+                    for(let i in data[1]){
+                        data1_zoma+=1;
+                    }
+                    if(data1_zoma == 10){
+                        rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                    }
+
+                    
+                }
+                if(document.getElementsByClassName("result_row").length > 0){
+                    document.getElementsByClassName("result_row")[0].style.borderWidth = "0px 0px 1px 0px";
+                    
+                }
+                
+                
+            })
+        };
+        
+        
+
+        var rows_observer = new IntersectionObserver(function(entries){
+            if(entries[0].isIntersecting == true){
+                let formdata = new FormData();
+                let searchtype_from = entries[0].target.className.split(" ")[1].split("_")[2]
+                // formdata.append("searchtype","add")
+                // formdata.append("searchtype_from",searchtype_from)
+                // formdata.append("searchtoken",searchtoken)
+
+                let loading_element = document.createElement("div");
+                loading_element.className = "lds-dual-ring";
+
+                lower_sect.append(loading_element)
+                fetch(`/saved_searches?continuing=true&searchtoken=${searchtoken}&searchfrom=${searchtype_from}&reversed=${reversed}`,{
+                    method : "GET"
+                    // ,body : formdata
+                }).then(async function(res){
+                    let rawdata = await res.text();
+                    rows_observer.unobserve(entries[0].target)
+                    for(let i of document.getElementsByClassName("lds-dual-ring")){
+                        lower_sect.removeChild(i)
+                    }
+                    if(rawdata == "notfound"){
+                        document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1].setAttribute("last_row","true")
+                    }
+                    else{
+                        let data = JSON.parse(rawdata);
+                        
+
+                        obj_data = Object.assign(obj_data,  data[1]  )
+                        if(lower_sect.currentview == "more_info"){
+
+                            html_data += data[0]
+
+                        }
+                        else if(lower_sect.currentview == "scrolling_rows"){
+                            lower_sect.innerHTML += data[0];
+                            html_data = results_pardiv.innerHTML;
+
+                            result_morebtn_f(obj_data)
+                            let data1_zoma = 0
+                            for(let i in data[1]){
+                                data1_zoma+=1;
+                            }
+                            if(data1_zoma == 10){
+                                rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                            }
+                        }
+
+                        
+                        
+                        
+
+                        
+
+                        
+                    }
+                    
+                    
+                })
+            }
+        },{threshold : [0]})
+        if(document.getElementsByClassName("result_row").length == 10){
+            rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length-1])
+        }
+        
+
+        
+        result_morebtn_f()
+        function sqrolsave(){
+                    results_pardiv.scr = results_pardiv.scrollTop;
+                }
+        results_pardiv.addEventListener("scroll",sqrolsave);
+        
+        function result_morebtn_f(){
+            console.log("butdayenba")
+            for(let i of document.getElementsByClassName("result_row_morebtn")){
+                let piradobis_nomeri = i.getAttribute("piradobis_nomeri") + "";
+
+                let monac = obj_data[piradobis_nomeri];
+
+                i.onclick = function(){
+                    lower_sect.currentview = "more_info";
+                    results_pardiv.removeEventListener("scroll",sqrolsave);
+                    
+                    
+                    let save_row_btn_style;
+                    // if({{loggedin_bool}}){
+                    if(true){
+                        save_row_btn_style = "";
+                    }
+                    else{
+                        save_row_btn_style = "display:none;";
+                    }
+                    
+
+                    results_pardiv.innerHTML = `
+
+                        <div class = "results_navbar">
+                            <div class = "ukan_dabruneba_btn">
+                                უკან
+                            </div>
+                            <div class = "savecanvas_par">
+                                <canvas style = "${save_row_btn_style}" class = "save_row" width = "32" height = "32">
+                                </canvas>
+                            </div>
+                                
+                        </div>
+
+                        
+
+
+                        <p class = "more_info_p">
+                            💳სახელი გვარი : ${monac["saxeligvari"]}<br>\n
+                                ⚥ სქესი : ${monac["sqesi"]}<br>\n
+                            🎂ასაკი : ${monac["asaki"]}<br>\n
+                            📅დაბადების თარიღი : ${monac["dabadebis_tarigi"]}<br>\n
+                            👨მამა : ${monac["mama"]}<br>\n
+                            📌საცხოვრებელი ქუჩა : ${monac["sacxovrebeli_qucha"]}<br>\n
+                            📍რეგიონი : ${monac["regioni"]}<br>\n
+                        </p>
+                    `;
+                    
+                    
+                    let save_row_btn= document.getElementsByClassName("save_row")[0]
+                    save_row_btn.setAttribute("saved",monac["saved_bool"])
+                    save_row_btn.ctx = save_row_btn.getContext("2d");
+
+                    save_row_btn.ctx.moveTo(1,1) // 1,30
+
+                    if(monac["saved_bool"] == "true"){
+                        save_row_btn.ctx.fillStyle = "#000000";
+                    }
+                    else{
+                        save_row_btn.ctx.fillStyle = "#FFFFFF";
+                    }
+                    
+                    save_row_btn.ctx.lineWidth = 2;
+                    save_row_btn.ctx.strokeStyle = "#000000";
+                    
+                    save_row_btn.ctx.lineTo(30,1) // 30,30
+                    save_row_btn.ctx.lineTo(30,30) // 30,1
+                    // save_row_btn.ctx.moveTo(30,30) // 30,1
+
+                    save_row_btn.ctx.lineTo(15,20) //15 ,11
+                    save_row_btn.ctx.lineTo(1,30) //1,1
+                    // save_row_btn.ctx.moveTo(1,30) // 1,1
+
+
+                    save_row_btn.ctx.lineTo(1,1) // 1,30
+        
+            
+                    save_row_btn.ctx.fill()
+                    save_row_btn.ctx.stroke()
+                    // 
+                    
+                    
+
+                    
+                        
+
+                    document.getElementsByClassName("ukan_dabruneba_btn")[0].onclick = function(){
+                        console.log("samkaindahell")
+                        results_pardiv.innerHTML = html_data; 
+                        results_pardiv.scrollTop = results_pardiv.scr;
+
+                        let current_person_list = [];
+
+                        let result_row_list = []
+                        for(let i of document.getElementsByClassName("result_row")){
+                            result_row_list.push(i)
+                        }
+                        for(let i in obj_data){
+                            current_person_list.push(i)
+                        }
+                        console.log(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                        if(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1].getAttribute("last_row") != "true"){
+                            rows_observer.observe(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1])
+                        }
+                        for(let i of result_row_list){
+                            let pirnom  = i.id.split("_")[2];
+
+                            if(obj_data[parseInt(pirnom)]["saved_bool"] == "false"){
+                                console.log("faqindo")
+                                let bolo_waishala = "false";
+                                if(document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1].getAttribute("last_row") == "true"){
+                                    bolo_waishala =  "true";
+                                }
+                                lower_sect.removeChild(document.getElementById(`result_row_${pirnom}`))
+                                if(bolo_waishala == "true"){
+                                    if(document.getElementsByClassName("result_row").length > 0){
+                                        document.getElementsByClassName("result_row")[document.getElementsByClassName("result_row").length -1].setAttribute("last_row","true")
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        // if(!current_person_list.includes()){
+
+                        // }
+                        if(document.getElementsByClassName("result_row").length > 0){
+                            results_pardiv.removeEventListener("scroll",sqrolsave);
+                            results_pardiv.addEventListener("scroll",sqrolsave);
+                            result_morebtn_f()
+                        }
+                        else{
+                            lower_sect.innerHTML = `
+                                <span id = "no_saved_persons_heading">თქვენ არ გყავთ არცერთი პიროვნება შენახული</span>
+
+                                <div id = "modzebna_redirect">მოძებნა</div>
+                            `;
+                            sort_by_input.style.display = "none";
+                            modzebna_redirect.onclick = function(){
+                                window.location.href = "/";
+                            }
+                        }
+
+                        
+                        lower_sect.currentview = "scrolling_rows";
+                    }
+                    save_row_btn.onclick = function(e){
+                        let x = e.offsetX;
+                        let y = document.getElementsByClassName("save_row")[0].getBoundingClientRect().height - e.offsetY;
+                        
+                        let an_y = 20
+                        
+                        
+                        
+
+                        let c = 21
+
+                        
+                        //(y/x) > (11/15) ||  (y/x) > (11/15)
+                        // (   y > ((11/15) * x)     )        ||  
+                        if(   (   y > ((11/15) * x)     )        ||        (   y > (   ( -(11/15) * x   )   + c)     )        ){
+                            
+                            // setInterval(anim_inter_init,100)
+
+                        }
+                        
+                        
+
+                        
+
+                    }
+                    save_row_btn.onmousemove = function(e){
+                        let x = e.offsetX;
+                        let y = document.getElementsByClassName("save_row")[0].getBoundingClientRect().height - e.offsetY;
+                        let pitagor = ((x**2) + (y ** 2) ) ** (1/2)
+                        
+                        
+                        let c = 21
+                        
+                        //(y/x) > (11/15) ||  (y/x) > (11/15)
+                        // (   y > ((11/15) * x)     )        ||  
+                        
+                        if(   (   y > ((11/15) * x)     )        ||        (   y > (   ( -(11/15) * x   )   + c)     )        ){
+                            
+                            save_row_btn.style.cursor = "pointer";
+                            save_row_btn.style.opacity = "0.7";
+                        }
+                        else{
+                            save_row_btn.style.cursor = "default";
+                            save_row_btn.style.opacity = "1";
+                        }
+                        
+                        
+
+                        
+
+
+                    }
+                    function save_row_f(){
+                        // #E5D9D9
+                        let shkala = 0.1
+                        let shkala_x = 0.001;
+
+                        let mshkala = 1.5;
+                        let mshkala_x = 0.01;
+                        function anim_inter_init(){
+
+                            // save_row_btn.ctx.clearRect(2,2,27,27);
+                            // save_row_btn.ctx.beginPath()
+                            // // save_row_btn.ctx = save_row_btn.getContext("2d");
+
+                            // save_row_btn.ctx.strokeStyle = "#FF0000";
+                            // save_row_btn.ctx.moveTo(30,30)
+                            // save_row_btn.ctx.lineTo(15,an_y);
+                            // save_row_btn.ctx.lineTo(1,30)
+                            // save_row_btn.ctx.stroke()
+                            // an_y+=-0.1;
+
+                            // vahahaaa
+                            if(shkala <= 1.3 ){
+                                    save_row_btn.style.transform = `translate(-50%,-50%) scale(${shkala})`;
+                                    // save_row_btn.style.width = `${shkala * 35}px`;
+                                        
+                                    shkala+= shkala_x;
+                                    shkala_x+=0.002;
+                                    
+                            }
+                            else{
+                                if(mshkala >= 1){
+                                    save_row_btn.style.transform = `translate(-50%,-50%) scale(${mshkala})`;
+
+                                    mshkala+= -mshkala_x;
+                                    mshkala_x+- 0.002;
+                                }
+                                else{
+                                    
+                                    let metodi;
+                                    if(save_row_btn.getAttribute("saved") == "false"){
+                                        save_row_btn.setAttribute("saved","true")
+
+                                        metodi = "POST"
+                                        monac["saved_bool"] = "true"
+
+
+
+                                    }
+                                    else{
+                                        save_row_btn.setAttribute("saved","false")
+
+                                        save_row_btn.ctx.fillStyle = "#FFFFFF";
+                                        save_row_btn.ctx.fill()
+                                        // save_row_btn.ctx.lineWidth = 2;
+                                        save_row_btn.ctx.stroke()
+
+                                        metodi = "DELETE"
+
+                                        monac["saved_bool"] = "false"
+
+                                    }
+                                    let forma = new FormData()
+
+                                    forma.append("piradobis_nomeri",piradobis_nomeri)
+
+                                    fetch("/save_search",{
+                                        method : metodi,
+                                        body : forma
+                                    }).then(async function(res){
+                                        let response = await res.text()
+                                        if(response == "success"){
+                                            if(metodi == "POST"){
+                                                erori("პიროვნება შეინახა წარმატებით✔️","dark")
+                                                
+                                            }
+                                            else if(metodi == "DELETE"){
+                                                erori("პიროვნება ამოიშალა შენახვებიდან წარმატებით","dark")
+                                            }
+                                        }
+                                        
+                                        
+                                    }).catch(
+                                        async function(){
+                                            erori("გთხოვთ შეამოწმოთ ინტერნეტ კავშირი","dark")
+                                        }
+                                    )
+                                    
+                                    save_row_btn.style.cursor = "pointer";
+                                    save_row_btn.style.opacity = "0.7";
+                                    clearInterval(row_shenaxva_interinstance);
+                                    
+                                }
+                            }
+                                
+
+
+                        }
+                        save_row_btn.parentNode.style.backgroundColor = "";
+                        
+                        
+                        let row_shenaxva_interinstance = setInterval(anim_inter_init,1)
+                        // save_row_btn.ctx.fillStyle = "#E5D9D9";
+                        // save_row_btn.ctx.fill()
+                        // save_row_btn.ctx.lineWidth = 2;
+                        save_row_btn.ctx.stroke()
+                        
+
+                    }
+                    function tachstart(e){
+                        
+                        save_row_btn.parentNode.style.backgroundColor = "rgb(203, 197, 197)";
+                        save_row_btn.ctx.fillStyle = "#000000";
+                        save_row_btn.ctx.fill()
+                        // save_row_btn.ctx.lineWidth = 2;
+                        save_row_btn.ctx.stroke()
+                        
+
+
+                    }
+                    if(window.innerWidth < 800){
+                        save_row_btn.addEventListener("touchstart",tachstart)
+                        save_row_btn.addEventListener("touchend",save_row_f)
+                    }
+                    else{
+                        save_row_btn.addEventListener("mousedown",tachstart)
+                        save_row_btn.addEventListener("mouseup",save_row_f)
+                    }
+                    
+
+                    
+                    
+
+                    save_row_btn.onmouseleave = function(){
+                        save_row_btn.style.cursor = "default";
+                        save_row_btn.style.opacity = "1";
+                    }
+
+                }
+            }
+        }
+
+       
+    </script>
+</body>
+</html>

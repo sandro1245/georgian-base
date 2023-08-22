@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href = "/static/allpage.css" rel="stylesheet">
+    <link href = "/static/confirmation.css" rel="stylesheet">
+    <link rel="icon" href = "/static/gb_sym.png">
+
+    <link href = "/static/eror.css" rel="stylesheet">
+
+    
+</head>
+<body>
+    {{navbar}}
+    {{bg}}
+    <div id="root">
+        <div id = "maindiv">
+            {{maincont}}
+               
+        </div>
+        <script src = "/static/eror.js"></script>
+        <script>
+            
+            var resend_vcode = document.getElementById("resend_vcode");
+            var submit = document.getElementById("submit");
+            var vcode_input = document.getElementById("vcode_input");
+            
+            resend_vcode.onclick = function(){
+                resend_vcode.innerText = "იგზავნება...";
+                fetch("/resend_vcode",{
+                    method : "POST"
+
+                }).then(
+                    res => {
+                        resend_vcode.innerText = "თავიდან გაგზავნა";
+                    }
+                ).catch(
+                    eror =>{
+                        resend_vcode.innerText = "თავიდან გაგზავნა";
+                        erori("შეამოწმეთ ინტერნეტი კავშირი",type="dark")
+                    }
+                )
+            }
+            submit.onclick = function(){
+                submit.innerText = "დასტურდება...";
+                let forma = new FormData();
+                forma.append("vcode",vcode_input.value)
+                fetch("/confirmation",{
+                    method : "POST",
+                    body : forma
+                }).then(
+                    async function(res){
+                        let dat = await res.text();
+                        let data = JSON.parse(dat);
+                        submit.innerText = "დადასტურება"
+                        if(data["result"] == "success"){
+                            livedirect("/");
+                        }
+                        else{
+                            erori(data["result"]);
+                        }
+                        
+                    }
+                ).catch(
+                    eror =>{
+                        submit.innerText = "დადასტურება"
+                        erori("შეამოწმეთ ინტერნეტი კავშირი",type="dark")
+                    }
+                )
+            }
+        </script>
+    </div>
+</body>
+</html>

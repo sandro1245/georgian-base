@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian base | რეგისტრაცია</title>
+    <link href = "/static/signup.css" rel="stylesheet">
+    <link href = "/static/allpage.css" rel="stylesheet">
+    <link rel="icon" href = "/static/gb_sym.png">
+
+    <script src = "/static/eror.js"></script>
+    <link href = "/static/eror.css" rel="stylesheet">
+    
+</head>
+<body>
+    {{navbar}}
+    {{bg}}
+    <div id="root">
+        <div id = "maindiv">
+            <h1 id = "heading">რეგისტრაცია</h1>
+            <input id = "mail_input" type = "text" placeholder="მეილი" class = "textinput"><br>
+            <input id = "pass_input" type = "password" placeholder = "პაროლი" class = "textinput"><br>
+            <input id = "conpass_input" type = "password" placeholder="გაიმეორეთ პაროლი" class = "textinput"><br>
+            <div id = "dadastureba_btn">დადასტურება</div>
+            
+        </div>
+    </div>
+    <script src = "/static/eror.js"></script>
+    <script>
+        var dadastureba_btn = document.getElementById("dadastureba_btn");
+        var mail_input = document.getElementById("mail_input");
+        var pass_input = document.getElementById("pass_input");
+        var conpass_input = document.getElementById("conpass_input");
+        
+        window.onkeyup = function(key){
+            if(key.key == "Enter"){
+                dadastureba_btn.click()
+            }
+        }
+        dadastureba_btn.onclick = async function(){
+            console.log("cliceked")
+            if(mail_input.value.length <=  40){
+                if(mail_input.value.length == 0 || !mail_input.value.includes("@")){
+                    erori("გთხოვთ მიუთითოთ ვალიდური მეილი")
+                }
+                else{
+                    console.log("damnit")
+                    if(pass_input.value.length < 8){
+                        erori("პაროლი უნდა იყოს არანაკლებ 8 სიმბოლოიანი")
+                    }
+                    else{
+                        console.log("rock")
+                        if(pass_input.value.length <= 100 ){
+                            if(pass_input.value != conpass_input.value){
+                                erori("პაროლები არ ემთხვევა ერთმანეთს")
+                            }
+                            else{
+                                console.log("done")
+                                
+                                let formdata = new FormData();
+                                formdata.append("mail",mail_input.value)
+                                formdata.append("xs",pass_input.value)
+                                
+                                dadastureba_btn.innerText = "დასტურდება...";
+                                fetch("/signup",{
+                                    method : "POST",
+                                    body : formdata
+                                }).then(
+                                    async function(f){
+                                        let dat = await f.text()
+                                        let data = JSON.parse(dat);
+                                        dadastureba_btn.innerText = "დადასტურება";
+                                        if(data["resbool"] == "true"){
+                                            document.cookie = `c_user=${data["c_user"]}`
+                                            document.cookie = `xs=${data["xs"]}`
+                                            
+                                            window.location.href = "/confirmation";
+                                        }
+                                        else if(data["resbool"] == "false"){
+                                            erori(data["eror_msg"])
+                                        }
+                                        console.log(data)
+                                    }
+                                ).catch(
+                                    er => {
+                                        dadastureba_btn.innerText = "დადასტურება"
+                                        erori("შეამოწმეთ ინტერნეტი კავშირი",type="dark")
+                                    }
+                                )
+
+                                
+
+
+                            }
+                        }
+                        else{
+                            erori("პაროლი უნდა იყოს მაქსიმუმ 100 სიმბოლოიანი")
+                        }
+                    }
+                }
+            }
+            else{
+                erori("მეილი უნდა იყოს მაქსიმუმ 40 სიმბოლოიანი")
+            }
+            
+        }
+    </script>
+</body>
+</html>

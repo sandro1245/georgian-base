@@ -1,0 +1,398 @@
+
+body{
+    overflow:hidden;
+}
+
+
+
+#main_div{
+    background-color: rgb(120, 195, 188);
+}
+#heading{
+    color: #cab333;
+    background-color: black;
+}
+
+#invites_count{
+    display: block;
+}
+#premiumi_agebulia_checkmark{
+    background-image: url("/static/checkmark.png");
+}
+@media only screen and (min-width:800px){
+    
+    #main_div{
+        width: 55%;
+        height: 65%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+    #heading{
+        font-size: 35px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        width: fit-content;
+    }
+    #invites_count{
+        position: relative;
+        left: 50%;
+        margin-top: 3%;
+        transform: translate(-50%,0%);
+        height: 90px;
+        font-size: 80px;
+        margin-bottom: 0;
+        width: 100%;
+        margin: 0;
+        overflow-y: hidden;
+        transform: translate(-50%,0);
+        display: block;
+    }
+    .invites_count_invited{
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    #invites_count_net{
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    #ip_note{
+        position: relative;
+        left: 50%;
+        margin-top: 5%;
+        transform: translate(-50%,-50%);
+        display: block;
+        max-width: 90%;
+        text-align: center;
+    }
+    #invite_link_textinput{
+
+        width: 50%;
+        border-radius: 5px;
+    
+    }
+    #invite_link_copybtn{
+        background-image: url("/static/copy_sym.png");
+        background-size: 100% 100%;
+        width: 4%;
+        aspect-ratio: 1/1;
+        margin-left: 1%;
+        background-color: black;
+        cursor: pointer;
+        border-radius: 50% 50%;
+        /* transform: opacity 0.3s; */
+        transform: background-color 0.3s;
+    }
+    #invite_link_copybtn:hover{
+        /* opacity: 0.8; */
+        background-color: gray;
+    }
+    #invite_link_textinput_parentdiv{
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-top: 5%;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #social_media_share_label{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        display: block;
+        width: fit-content;
+
+    }
+
+    #social_media_sharebtns_parentdiv{
+        position: relative;
+        width: 40%;
+        display: flex;
+        justify-content: space-around;
+        /* background-color: green;
+        margin-top: 2%; */
+        margin-top: 5%;
+        left: 50%;
+        transform: translate(-50%,0%);
+
+    }
+
+
+
+    .social_media_sharebtn{
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+
+    #facebook_sharebtn{
+        width: 50px;
+        height: 50px;
+        /* background-color: white; */
+        border:1px solid #3D5899;
+        
+    }
+    #facebook_sharebtn:hover{
+        background-color: #3D5899;
+    }
+
+
+    #twitter_sharebtn{
+        width: 50px;
+        height: 50px;
+        border: 1px solid #1D9BF0;
+    }
+    #twitter_sharebtn:hover{
+        background-color: #1D9BF0;
+    }
+    #linkedin_sharebtn{
+        width: 50px;
+        height: 50px;
+        border: 1px solid #0066C8;
+    }
+    #linkedin_sharebtn:hover{
+        background-color: #0066C8;
+    }
+
+
+
+
+    #fb_svg{
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%) scale(1.25);
+    }
+
+    #premiumi_agebulia_checkmark{
+        position: relative;
+        background-size: 107% 107%;
+        left: 50%;
+        width: 20%;
+        margin:15% 0% 0% 0%;
+        /* top: 50%; */
+        aspect-ratio: 1/1;
+        background-color: white;
+        border-radius: 50% 50%;
+        background-position: center;
+        transform: translate(-50%,-50%);
+    }
+    #premiumi_agebulia_label{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        width: fit-content;
+        font-size: 20px;
+    }
+}
+@media only screen and (max-width:800px){
+    #main_div{
+        width: 85%;
+        height: 75%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+    #heading{
+        font-size: 35px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        width: fit-content;
+    }
+    #invites_count{
+        position: relative;
+        left: 50%;
+        margin-top: 3%;
+        transform: translate(-50%,0%);
+        height: 90px;
+        font-size: 80px;
+        margin-bottom: 0;
+        width: 100%;
+        margin: 0;
+        overflow-y: hidden;
+        transform: translate(-50%,0);
+        display: block;
+    }
+    .invites_count_invited{
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    #invites_count_net{
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    #ip_note{
+        position: relative;
+        left: 50%;
+        margin-top: 10%;
+        transform: translate(-50%,0%);
+        display: block;
+        max-width: 90%;
+        text-align: center;
+    }
+    #invite_link_textinput{
+
+        width: 70%;
+        border-radius: 5px;
+    
+    }
+    #invite_link_copybtn{
+        background-image: url("/static/copy_sym.png");
+        background-size: 100% 100%;
+        width: 10%;
+        aspect-ratio: 1/1;
+        margin-left: 1%;
+        background-color: black;
+        cursor: pointer;
+        border-radius: 50% 50%;
+        /* transform: opacity 0.3s; */
+        transform: background-color 0.3s;
+    }
+    #invite_link_copybtn:hover{
+        /* opacity: 0.8; */
+        background-color: gray;
+    }
+    #invite_link_textinput_parentdiv{
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-top: 15%;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #social_media_share_label{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        display: block;
+        width: fit-content;
+        text-align: center;
+        margin-top: 15%;
+
+    }
+
+    #social_media_sharebtns_parentdiv{
+        position: relative;
+        width: 70%;
+        display: flex;
+        justify-content: space-around;
+        /* background-color: green;
+        margin-top: 2%; */
+        margin-top: 5%;
+        left: 50%;
+        transform: translate(-50%,0%);
+
+    }
+
+
+
+    .social_media_sharebtn{
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+
+    #facebook_sharebtn{
+        width: 50px;
+        height: 50px;
+        /* background-color: white; */
+        border:1px solid #3D5899;
+        
+    }
+    #facebook_sharebtn:hover{
+        background-color: #3D5899;
+    }
+
+
+    #twitter_sharebtn{
+        width: 50px;
+        height: 50px;
+        border: 1px solid #1D9BF0;
+    }
+    #twitter_sharebtn:hover{
+        background-color: #1D9BF0;
+    }
+    #linkedin_sharebtn{
+        width: 50px;
+        height: 50px;
+        border: 1px solid #0066C8;
+    }
+    #linkedin_sharebtn:hover{
+        background-color: #0066C8;
+    }
+
+
+
+
+    #fb_svg{
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%) scale(1.25);
+    }
+    #premiumi_agebulia_checkmark{
+        position: relative;
+        background-size: 107% 107%;
+        left: 50%;
+        width: 40%;
+        margin: 55% 0% 0% 0%;
+        /* top: 50%; */
+        aspect-ratio: 1/1;
+        background-color: white;
+        border-radius: 50% 50%;
+        background-position: center;
+        transform: translate(-50%,-50%);
+    }
+    #premiumi_agebulia_label{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0%);
+        width: fit-content;
+        font-size: 20px;
+        text-align:center;
+    }
+}

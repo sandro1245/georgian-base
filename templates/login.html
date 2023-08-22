@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian base | ავტორიზაცია</title>
+    <link href = "/static/login.css" rel="stylesheet">
+    <link href = "/static/allpage.css" rel="stylesheet">
+    <link rel="icon" href = "/static/gb_sym.png">
+
+    
+    <link href = "/static/eror.css" rel="stylesheet">
+    
+</head>
+<body>
+    {{navbar}}
+    {{bg}}
+    <div id="root">
+        <div id = "maindiv">
+            <h1 id = "heading">ავტორიზაცია</h1>
+            <input id = "mail_input" type = "text" placeholder="მეილი" class = "textinput"><br>
+            <input id = "pass_input" type = "password" placeholder = "პაროლი" class = "textinput"><br>
+            <div id = "dadastureba_btn">დადასტურება</div>
+            
+        </div>
+    </div>
+    <script src = "/static/eror.js"></script>
+    <script>
+
+        var redirecti = "{{redirecti}}" 
+
+
+
+
+
+        var dadastureba_btn = document.getElementById("dadastureba_btn");
+        var mail_input = document.getElementById("mail_input");
+        var pass_input = document.getElementById("pass_input");
+
+
+        
+        window.onkeyup = function(key){
+            if(key.key == "Enter"){
+                dadastureba_btn.click()
+            }
+        }
+        dadastureba_btn.onclick = async function(){
+            dadastureba_btn.innerText = "დასტურდება..."
+            let formi = new FormData();
+            formi.append("mail_input",mail_input.value);
+            formi.append("pass_input",pass_input.value);
+            
+            fetch("/login",{
+                method : "POST",
+                body : formi
+            }).then(
+                async function(r){
+                    let txt = await r.text()
+                    
+                    let data = JSON.parse(txt);
+
+                    if(data["resbool"] == "true"){
+                        document.cookie= `c_user=${data["c_user"]}`;
+                        document.cookie= `xs=${data["xs"]}`;
+                        
+                        if(redirecti == "None"){
+                            window.location.href = "/";
+                        }
+                        else{
+                            window.location.href = redirecti
+                        }
+                        
+                        
+                    }
+                    else{
+                        dadastureba_btn.innerText = "დადასტურება"
+                        erori(data["msg"])
+                    }
+                    
+                }
+            )
+        }
+    </script>
+</body>
+</html>

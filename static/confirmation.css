@@ -1,0 +1,241 @@
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+@media only screen and (max-width:800px){
+    #maindiv{
+        position: absolute;
+        background-color: grey;
+        width: 80%;
+        height: 450px;
+        z-index:10;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+    }
+    #heading{
+        position: relative;
+        left: 50%;
+        /* top:50%; */
+        width: fit-content;
+        text-align: center;
+        top:15%;
+        transform: translate(-50%,-50%);
+        font-size: 25px;
+        text-shadow: 15px 15px 15px black;
+    }
+    #agwera{
+        position: relative;
+        left: 50%;
+        top:25%;
+        width: fit-content;
+        font-size:15px;
+        padding: 5px;
+        margin:5px;
+        /* inline-size: min-content; */
+        overflow-wrap: anywhere;
+        /* white-space: pre; */
+
+        text-align: center;
+        transform: translate(-50%,-50%);
+    }
+    #vcode_input{
+        position: relative;
+        left: 50%;
+        top:20%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+        padding: 4px;
+        max-width: 80%;
+        font-size: 20px;
+        border-radius: 5px;
+        transition: box-shadow 0.3s;
+    }
+    #vcode_input:hover{
+        box-shadow:5px 5px 15px black;
+    }
+    #vcode_manage_div{
+        position: relative;
+        width: 100%;
+        left: 50%;
+        top:40%;
+        height: 200px;
+        transform: translate(-50%,-50%);
+        /* justify-content: space-between; */
+    }
+    #resend_vcode{
+        color:blue;
+        position: relative;
+        width: fit-content;
+        text-align: center;
+
+
+
+        display: inline;
+        margin-left:10px;
+        /* display: block; */
+        /* left:50%; */
+        /* transform: translate(-50%,0%); */
+
+    }
+    
+    #submit{
+        position: relative;
+        background-color: blue;
+        color:white;
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 5px;
+        left:50%;
+        top:25%;
+        font-size: 20px;
+        text-align: center;
+        transform:translate(-50%,0%);
+        cursor: pointer;
+        transition: opacity 0.4s,box-shadow 0.3s;
+    }
+    #checkmark{
+        background-image: url("/static/checkmark.png");
+        background-size: 110% 110%;
+        background-position: center;
+        position: relative;
+        width: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 44%;
+        aspect-ratio: 1/1;
+        
+        border-radius: 50% 50%;
+        background-color: white;
+    }
+    #nosymbol{
+        background-image: url("/static/no-symbol-sign-clip-art-prohibited-signs.png");
+        background-size: 100% 100%;
+        background-position: center;
+        position: relative;
+        width: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 44%;
+        aspect-ratio: 1/1;
+        
+        border-radius: 50% 50%;
+        background-color: white;
+    }
+    
+
+}
+@media only screen and (min-width:800px){
+    #maindiv{
+        position: absolute;
+        background-color: grey;
+        width: 60%;
+        height: 300px;
+        z-index:10;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+    }
+    #heading{
+        position: relative;
+        left: 50%;
+        /* top:50%; */
+        width: fit-content;
+        transform: translate(-50%,-50%);
+        text-shadow: 15px 15px 15px black;
+    }
+    #agwera{
+        position: relative;
+        left: 50%;
+        width: fit-content;
+        transform: translate(-50%,-50%);
+    }
+    #vcode_input{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+        padding: 4px;
+        font-size: 20px;
+        border-radius: 5px;
+        transition: box-shadow 0.3s;
+    }
+    #vcode_input:hover{
+        box-shadow:5px 5px 15px black;
+    }
+    #vcode_manage_div{
+        position: relative;
+        display: flex;
+        /* background-color: red; */
+        width: 550px;
+        left: 50%;
+        top:10%;
+        transform: translate(-50%,-50%);
+        justify-content: space-around;
+        /* justify-content: space-between; */
+    }
+    #resend_vcode{
+        color:blue;
+        cursor: pointer;
+        border:2px solid white;
+        /* background-color: white; */
+        width: fit-content;
+        padding:10px;
+        cursor: pointer;
+        transition: background-color 0.4s,box-shadow 0.3s;
+        /* text-decoration:underline; */
+    }
+    #resend_vcode:hover{
+        background-color: white;
+        box-shadow: 5px 5px 15px black;
+    }
+    #submit{
+        position: relative;
+        background-color: blue;
+        color:white;
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: opacity 0.4s,box-shadow 0.3s;
+    }
+    #submit:hover{
+        opacity: 0.7;
+        box-shadow: 5px 5px 15px black;
+    }
+    #checkmark{
+        background-image: url("/static/checkmark.png");
+        background-size: 110% 110%;
+        background-position: center;
+        position: relative;
+        width: 16%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 25%;
+        aspect-ratio: 1/1;
+        border-radius: 50% 50%;
+        background-color: white;
+    }
+    #nosymbol{
+        background-image: url("/static/no-symbol-sign-clip-art-prohibited-signs.png");
+        background-size: 100% 100%;
+        background-position: center;
+        position: relative;
+        width: 16%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 25%;
+        aspect-ratio: 1/1;
+        border-radius: 50% 50%;
+        background-color: white;
+    }
+}
